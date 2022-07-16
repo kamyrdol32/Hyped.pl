@@ -1,8 +1,7 @@
 from random import randrange
-
 from flask import jsonify, Blueprint
 
-import app
+import core
 import models
 
 api_blueprint = Blueprint('api', __name__, )
@@ -10,7 +9,7 @@ api_blueprint = Blueprint('api', __name__, )
 
 @api_blueprint.route('/db/create')
 def create_db():
-    app.db.create_all()
+    core.db.create_all()
     return jsonify({'msg': 'Database created'})
 
 
@@ -28,13 +27,11 @@ def add_film():
             Image='Image ' + str(randrange(1, 100)),
             URL='URL ' + str(randrange(1, 100))
         )
-        app.db.session.add(film)
-        app.db.session.commit()
-        app.app.logger.info('Film added - ' + film.Title)
+        core.db.session.add(film)
+        core.db.session.commit()
         return jsonify('Film added - ' + film.Title), 201
     except Exception as error:
         print(error)
-        app.app.logger.error(error)
         return jsonify('Error'), 500
 
 
@@ -85,8 +82,8 @@ def get_film(nr=False):
 def delete_film(nr):
     try:
         Film = models.Film.query.filter_by(ID=nr).first()
-        app.db.session.delete(Film)
-        app.db.session.commit()
+        core.db.session.delete(Film)
+        core.db.session.commit()
         # print('Film deleted - ', Film.Title)
         return jsonify('Film deleted - ' + Film.Title), 200
     except:

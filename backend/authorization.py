@@ -4,7 +4,7 @@ from flask import jsonify, Blueprint, request
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, set_access_cookies, \
     unset_jwt_cookies, get_jwt
 
-import app
+import core
 import models
 
 authorization_blueprint = Blueprint('auth', __name__, )
@@ -28,10 +28,14 @@ def register():
 
     if username and password and email:
         try:
-            user = models.User(Username=username, Email=email, Password=hashlib.sha256(password.encode('utf-8')).hexdigest())
+            user = models.User(
+                Username=username,
+                Email=email,
+                Password=hashlib.sha256(password.encode('utf-8')).hexdigest()
+            )
             core.db.session.add(user)
             core.db.session.commit()
-            send_email(username, email, 'Registration', 'You have successfully registered!')
+            # send_email(username, email, 'Registration', 'You have successfully registered!')
             return jsonify({'msg': 'User added', 'key': hashlib.sha256(user.Username.encode('utf-8')).hexdigest()})
         except Exception as error:
             core.db.session.rollback()
@@ -92,7 +96,6 @@ def activate(id, key):
         return jsonify({'msg': error}), 500
 
 
-
 @authorization_blueprint.route('/logout', methods=['GET'])
 @jwt_required()
 def logout():
@@ -107,10 +110,3 @@ def protected():
     current_user = get_jwt_identity()
     claims = get_jwt()
     return jsonify(current_user, claims), 200
-
-###
-
-def send_email(name, email, subject, message):
-    msg = core.Message(name + " - " + subject, sender=email, recipients=["kam.zeglen@gmail.com"])
-    msg.html = "Wiadomość od: <b>"+ name + "</b><br><br>" + message + "<br><br>###<br>Adres kontaktowy: " + email + "<br>###"
-    core.mail.send(msg)
