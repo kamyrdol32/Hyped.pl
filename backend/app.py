@@ -1,6 +1,6 @@
 import models
 import api
-# import authorization
+import authorization
 # import logging
 # import scraper
 
@@ -11,7 +11,7 @@ from flask_jwt_extended import JWTManager
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 app.register_blueprint(api.api_blueprint, url_prefix='/api')
-# app.register_blueprint(authorization.authorization_blueprint, url_prefix='/auth')
+app.register_blueprint(authorization.authorization_blueprint, url_prefix='/auth')
 # app.register_blueprint(scraper.scraper_blueprint, url_prefix='/scraper')
 
 db = SQLAlchemy(app)

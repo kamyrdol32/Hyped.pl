@@ -1,2 +1,6 @@
+# Python
 /venv/
 /backend/scraper.py
+
+# React
+/frontend/node_modules/

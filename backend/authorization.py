@@ -4,7 +4,7 @@ from flask import jsonify, Blueprint, request
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, set_access_cookies, \
     unset_jwt_cookies, get_jwt
 
-import core
+import app
 import models
 
 authorization_blueprint = Blueprint('auth', __name__, )
