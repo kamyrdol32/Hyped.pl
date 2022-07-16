@@ -1,13 +1,12 @@
+from flask import Flask, render_template
+from flask_jwt_extended import JWTManager
+from flask_sqlalchemy import SQLAlchemy
+
 import models
 import api
 import authorization
-import logging
+
 # import scraper
-
-from flask import Flask, render_template, jsonify
-from flask_sqlalchemy import SQLAlchemy
-
-from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -18,16 +17,17 @@ app.register_blueprint(authorization.authorization_blueprint, url_prefix='/auth'
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
 
-logging.basicConfig(filename='record.log', level=logging.DEBUG)
 
 @app.errorhandler(404)
 def not_found_error(error):
+    print(error)
     return render_template('404.html'), 404
 
 
 @app.errorhandler(500)
 def internal_error(error):
     db.session.rollback()
+    print(error)
     return render_template('500.html'), 500
 
 

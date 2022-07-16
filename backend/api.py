@@ -35,7 +35,6 @@ def add_film():
         return jsonify('Error'), 500
 
 
-
 @api_blueprint.route('/films/get')
 @api_blueprint.route('/films/get/<nr>')
 def get_films(nr=1):
@@ -78,6 +77,7 @@ def get_film(nr=False):
     else:
         return jsonify('Error'), 500
 
+
 @api_blueprint.route('/films/delete/<nr>')
 def delete_film(nr):
     try:
@@ -86,6 +86,6 @@ def delete_film(nr):
         core.db.session.commit()
         # print('Film deleted - ', Film.Title)
         return jsonify('Film deleted - ' + Film.Title), 200
-    except:
-        # print('Film not found')
+    except Exception as error:
+        print(error)
         return jsonify('Film not found'), 404

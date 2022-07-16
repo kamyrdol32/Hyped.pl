@@ -25,7 +25,6 @@ class User(db.Model):
         return self.Username
 
 
-
 class Film(db.Model):
     __tablename__ = 'Films'
     ID = db.Column(db.Integer, primary_key=True)
