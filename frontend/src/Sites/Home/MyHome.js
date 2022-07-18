@@ -1,13 +1,18 @@
 // Imports
-import React from 'react';
-
-// Components
-
+import React, {useContext} from 'react';
+import themeContext from "../../Context/ThemeContext";
 
 // CSS
 import './MyHome.css';
+import {Container} from "react-bootstrap";
 
 // Code
 export default function MyHome() {
-	  return <h1>Home</h1>;
+	const {theme} = useContext(themeContext);
+	return(
+		<Container id="MyHome">
+			<div className="MyHome">This is MyHome</div>
+			<div className="MyHome">Aktualny tryb: {theme}</div>
+		</Container>
+	);
 }

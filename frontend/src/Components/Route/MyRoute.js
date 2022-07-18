@@ -6,6 +6,7 @@ import {Container} from "react-bootstrap";
 // Components
 import MyHome from "../../Sites/Home/MyHome";
 import MyFilmList from "../../Sites/MyFilmList/MyFilmList";
+import MyFilm from "../../Sites/MyFilm/MyFilm";
 
 // CSS
 import './MyRoute.css';
@@ -14,9 +15,10 @@ import './MyRoute.css';
 export default function MyRoute() {
 	return (
 		<Container>
-			<Routes>
+			<Routes >
 				<Route path="/" element={<MyHome />} />
 				<Route path="/films" element={<MyFilmList />} />
+				<Route path="/film/:ID" element={<MyFilm />} />
 			</Routes>
 		</Container>
 	)

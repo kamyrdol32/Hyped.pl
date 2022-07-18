@@ -4,9 +4,14 @@ body {
 }
 
 #root {
-    background: var(--background-primary);
-    color: var(--text-primary);
     height: calc(100vh - 58px);
+    background-color: var(--my-background-primary) !important;
+    color: var(--my-text-primary);
+}
+
+.App {
+    background-color: var(--my-background-primary) !important;
+    color: var(--my-text-primary);
 }
 
 #root::before {
@@ -16,7 +21,7 @@ body {
     height: 10vh;
     left: -3vw;
     top: 0vh;
-    background: var(--accent);
+    background: var(--my-accent-primary);
     transform: rotate(45deg);
     box-shadow: rgb(0 0 0 / 50%) 0 0 7px 0;
     border: 2px solid black;
@@ -29,8 +34,8 @@ body {
     height: 10vh;
     right: -3vw;
     top: 0vh;
-    background: var(--accent);
+    background: var(--my-accent-primary);
     transform: rotate(45deg);
     box-shadow: rgb(0 0 0 / 50%) 0 0 7px 0;
-    border: 2px solid black;
+    border: 2px solid var(--my-accent-secondary);
 }

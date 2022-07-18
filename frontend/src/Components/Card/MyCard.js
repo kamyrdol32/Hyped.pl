@@ -27,7 +27,7 @@ function MyCard(props) {
 							</Card.Title>
 							<div className="p-2">
 								<Card.Text><h6 className="text-muted">{props.Description}</h6></Card.Text>
-								<ListGroup variant="flush">
+								<ListGroup variant="flush" va>
 									<ListGroup.Item><h6 className="text-muted"><text className="fw-bold">Premiera</text>: {props.Year}</h6></ListGroup.Item>
 									<ListGroup.Item><h6 className="text-muted"><text className="fw-bold">Reżyser</text>: {props.Director}</h6></ListGroup.Item>
 									<ListGroup.Item><h6 className="text-muted"><text className="fw-bold">Produkcja</text>: {props.Country}</h6></ListGroup.Item>

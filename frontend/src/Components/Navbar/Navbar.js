@@ -1,16 +1,17 @@
 // Imports
-import React from 'react';
+import React, {useContext} from 'react';
 import {Button, Container, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
-
-// Components
-
+import ThemeContext from "../../Context/ThemeContext";
 
 // CSS
 import './Navbar.css';
 
 // Code
 function MyNavBar () {
+    const {theme, setTheme} = useContext(ThemeContext);
+	const changeTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
+
     return (
             <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className=" navbarScroll">
                 <Container>
@@ -39,6 +40,11 @@ function MyNavBar () {
                             <LinkContainer to="/login">
                                 <Nav.Link className="ps-4">Zaloguj</Nav.Link>
                             </LinkContainer>
+                        </Nav>
+                        <Nav >
+                            <Container>
+                                <Nav.Link onClick={changeTheme} className="ps-4">Zmien tryb</Nav.Link>
+                            </Container>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

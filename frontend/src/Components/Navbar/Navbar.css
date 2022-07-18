@@ -1,17 +1,18 @@
 /* Navbar */
 .navbar {
     font-weight: bold;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid var(--my-accent-primary);
+    transition: all .5s;
 }
 .navbar a:hover {
-    color: var(--accent) !important;
+    color: var(--my-accent-primary) !important;
 }
 
 .navbar .navbar-brand {
-    color: var(--accent) !important;
+    color: var(--my-accent-primary) !important;
 }
 
 .active.nav-link {
-    color: var(--accent) !important;
+    color: var(--my-accent-primary) !important;
 }
 

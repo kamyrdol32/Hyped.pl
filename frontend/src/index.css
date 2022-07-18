@@ -9,19 +9,19 @@
 }
 
 :root {
-    --navbar-bg-color: #1a1a1a;
-    --background-primary: white;
-    --background-secondary: white;
-    --text-primary: black;
-    --text-secondary: royalblue;
-    --accent: #ECB72D;
+    --my-background-primary: white;
+    --my-background-secondary: white;
+    --my-text-primary: black;
+    --my-text-secondary: royalblue;
+    --my-accent-primary: #ECB72D;
+    --my-accent-secondary: #000000;
 }
 
 [data-theme="dark"] {
-    --navbar-bg-color: #1a1a1a;
-    --background-primary: #272727;
-    --background-secondary: #353535;
-    --text-primary: black;
-    --text-secondary: royalblue;
-    --accent: #ECB72D;
+    --my-background-primary: #272727;
+    --my-background-secondary: #353535;
+    --my-text-primary: #ffffff;
+    --my-text-secondary: royalblue;
+    --my-accent-primary: #ECB72D;
+    --my-accent-secondary: #000000;
 }

@@ -1,5 +1,6 @@
 // Imports
 import React from 'react';
+import {useParams} from "react-router-dom";
 
 // Components
 
@@ -9,5 +10,7 @@ import './MyFilm.css';
 
 // Code
 export default function MyFilm() {
-	  return <h1>MyFilm</h1>;
+	const params = useParams()
+
+	return <h1>MyFilm {params.ID} </h1>;
 }
