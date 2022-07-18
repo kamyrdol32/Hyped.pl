@@ -1,3 +1,4 @@
+from datetime import datetime
 from core import db
 
 
@@ -16,6 +17,7 @@ class User(db.Model):
         self.Password = Password
         self.Is_Active = Is_Active
         self.Is_Admin = Is_Admin
+
         print('User created -', self.Username)
 
     def __repr__(self):
@@ -55,6 +57,28 @@ class Film(db.Model):
 
     def __str__(self):
         return self.Title
+
+
+class Film_Comment(db.Model):
+    __tablename__ = 'Films_Comments'
+    ID = db.Column(db.Integer, primary_key=True)
+    Film_ID = db.Column(db.Integer, db.ForeignKey('Films.ID'))
+    User_ID = db.Column(db.Integer, db.ForeignKey('Users.ID'))
+    Comment = db.Column(db.String(1000), nullable=True)
+    Date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
+
+    def __init__(self, Film_ID, User_ID, Comment, Date):
+        self.Film_ID = Film_ID
+        self.User_ID = User_ID
+        self.Comment = Comment
+        self.Date = Date
+        print('Film comment created -', self.Comment)
+
+    def __repr__(self):
+        return '<Film comment %r>' % self.Comment
+
+    def __str__(self):
+        return self.Comment
 
 
 class Serials(db.Model):

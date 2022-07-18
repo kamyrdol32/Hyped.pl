@@ -17,12 +17,12 @@ body {
 #root::before {
     content: " ";
     position: fixed;
-    width: 10vh;
-    height: 10vh;
-    left: -3vw;
+    width: 100vw;
+    height: 12vh;
+    left: -50vw;
     top: 0vh;
     background: var(--my-accent-primary);
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
     box-shadow: rgb(0 0 0 / 50%) 0 0 7px 0;
     border: 2px solid black;
 }
@@ -30,9 +30,9 @@ body {
 #root::after {
     content: " ";
     position: fixed;
-    width: 10vh;
-    height: 10vh;
-    right: -3vw;
+    width: 100vw;
+    height: 12vh;
+    right: -50vw;
     top: 0vh;
     background: var(--my-accent-primary);
     transform: rotate(45deg);

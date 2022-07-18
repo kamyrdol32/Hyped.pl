@@ -1,6 +1,6 @@
 // Imports
 import React from 'react';
-import {MemoryRouter} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import ThemeContext from "./Context/ThemeContext";
 import useLocalStorage from "use-local-storage";
 
@@ -21,10 +21,10 @@ export default function App() {
 
 	return (
 		<ThemeContext.Provider value={{theme, setTheme}}>
-			<MemoryRouter>
+			<BrowserRouter>
 				<MyNavBar />
 				<MyRoute />
-			</MemoryRouter>
+			</BrowserRouter>
 		</ThemeContext.Provider>
 	)
 }

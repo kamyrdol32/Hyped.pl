@@ -9,19 +9,21 @@
 }
 
 :root {
-    --my-background-primary: white;
-    --my-background-secondary: white;
-    --my-text-primary: black;
-    --my-text-secondary: royalblue;
+    --my-background-primary: #ededed;
+    --my-background-secondary: #c8c8c8;
+    --my-text-primary: #272727;
+    --my-text-secondary: #000000;
     --my-accent-primary: #ECB72D;
     --my-accent-secondary: #000000;
+    --my-border-primary: #000000;
 }
 
 [data-theme="dark"] {
     --my-background-primary: #272727;
-    --my-background-secondary: #353535;
-    --my-text-primary: #ffffff;
-    --my-text-secondary: royalblue;
+    --my-background-secondary: #323232;
+    --my-text-primary: #ededed;
+    --my-text-secondary: #ffffff;
     --my-accent-primary: #ECB72D;
     --my-accent-secondary: #000000;
+    --my-border-primary: #000000;
 }

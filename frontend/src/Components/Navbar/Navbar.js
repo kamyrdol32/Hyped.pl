@@ -6,11 +6,14 @@ import ThemeContext from "../../Context/ThemeContext";
 
 // CSS
 import './Navbar.css';
+import button from "bootstrap/js/src/button";
 
 // Code
 function MyNavBar () {
     const {theme, setTheme} = useContext(ThemeContext);
 	const changeTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
+
+    let theme_icon = theme === 'dark' ? 'fa fa-sun' : 'fa fa-moon';
 
     return (
             <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className=" navbarScroll">
@@ -43,7 +46,7 @@ function MyNavBar () {
                         </Nav>
                         <Nav >
                             <Container>
-                                <Nav.Link onClick={changeTheme} className="ps-4">Zmien tryb</Nav.Link>
+                                <Nav.Link onClick={changeTheme} className="ps-4"><span className={theme_icon}></span></Nav.Link>
                             </Container>
                         </Nav>
                     </Navbar.Collapse>
