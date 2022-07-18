@@ -30,6 +30,7 @@ export default function MyFilmList() {
                 (error) => {
                     setIsLoaded(true);
                     setError(error);
+                    console.log(error);
                 }
             );
         page++;
