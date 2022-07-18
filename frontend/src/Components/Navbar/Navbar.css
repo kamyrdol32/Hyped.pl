@@ -1,0 +1,17 @@
+/* Navbar */
+.navbar {
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+.navbar a:hover {
+    color: var(--accent) !important;
+}
+
+.navbar .navbar-brand {
+    color: var(--accent) !important;
+}
+
+.active.nav-link {
+    color: var(--accent) !important;
+}
+
