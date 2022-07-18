@@ -1,0 +1,21 @@
+.MyCard {
+    border: rgba(33, 33, 33, 0.12) solid 1px;
+    border-radius: 20px;
+}
+
+.MyCard:hover {
+    border: 0;
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.4);
+}
+
+.MyCard_IMG {
+    border-top-left-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+    border-right: rgba(33, 33, 33, 0.12) solid 1px;
+}
+
+.MyCard_Link, .MyCard_Link:hover, .MyCard_Link:focus, .MyCard_Link:active {
+    text-decoration: none;
+    font-weight: bolder;
+    color: var(--text-primary);
+}
