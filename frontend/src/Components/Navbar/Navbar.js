@@ -6,10 +6,9 @@ import ThemeContext from "../../Context/ThemeContext";
 
 // CSS
 import './Navbar.css';
-import button from "bootstrap/js/src/button";
 
 // Code
-function MyNavBar () {
+function MyNavBar (props) {
     const {theme, setTheme} = useContext(ThemeContext);
 	const changeTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
@@ -40,9 +39,15 @@ function MyNavBar () {
                             <Button variant="outline-warning">Wyszukaj</Button>
                             </Form>
                         <Nav >
-                            <LinkContainer to="/login">
-                                <Nav.Link className="ps-4">Zaloguj</Nav.Link>
-                            </LinkContainer>
+                            {!props.token && props.token !== "" && props.token !== undefined?
+                                <LinkContainer to="/login">
+                                    <Nav.Link className="ps-4">Zaloguj</Nav.Link>
+                                </LinkContainer>
+                            :(
+                                <LinkContainer to="/profile">
+                                    <Nav.Link className="ps-4">Profil</Nav.Link>
+                                </LinkContainer>
+                            )}
                         </Nav>
                         <Nav >
                             <Container>

@@ -10,8 +10,7 @@ JSON_SORT_KEYS = False
 
 # JWT
 JWT_SECRET_KEY = 'fgdR@#TRH#^4E'
-JWT_TOKEN_LOCATION = 'cookies'
-JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=1)
+JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=5)
 
 
 # Email

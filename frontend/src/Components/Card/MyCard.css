@@ -1,13 +1,12 @@
 .MyCard {
     border: rgba(33, 33, 33, 0.12) solid 1px;
     border-radius: 20px;
-    background-color: var(--my-background-primary);
+    background-color: var(--my-background-secondary);
 }
 
 .MyCard:hover {
     border: 0;
     box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.4);
-    background-color: var(--my-background-secondary);
 }
 
 .MyCard_Img {
@@ -16,10 +15,16 @@
     border-right: rgba(33, 33, 33, 0.12) solid 1px;
 }
 
-.MyCard_Link, .MyCard_Link:hover, .MyCard_Link:focus, .MyCard_Link:active {
+.MyCard_Link {
     text-decoration: none;
     font-weight: bolder;
     color: var(--my-text-primary);
+}
+
+.MyCard_Link:hover, .MyCard_Link:focus, .MyCard_Link:active {
+    text-decoration: none;
+    font-weight: bolder;
+    color: var(--my-accent-primary);
 }
 
 .MyCard_Body .text-muted {
@@ -27,9 +32,22 @@
 }
 
 .MyCard_ListGroup {
-    background-color: var(--my-background-primary);
+    background-color: var(--my-background-secondary);
 }
 
 .MyCard:Hover .MyCard_ListGroup {
     background-color: var(--my-background-secondary);
+}
+
+.MyCard .MyCard_Rating {
+    color: var(--my-accent-primary);
+}
+
+.MyCard .MyCard_NR {
+    color: var(--my-accent-primary);
+    font-weight: bolder;
+}
+
+.MyCard .MyCard_Title {
+    font-weight: bolder;
 }

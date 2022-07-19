@@ -13,15 +13,16 @@ function MyCard(props) {
 	return (
 		<Container>
 			<Row className="justify-content-center p-3">
-				<Col lg="8" className="MyCard p-0 row">
-					<Col lg="4" className="p-0">
+				<Col xl="8" className="MyCard p-0 row">
+					<Col md="4" className="p-0">
 						<Card.Img className="MyCard_Img" src={props.Image} alt={props.Title} />
 					</Col>
 					<Col lg="8" className="MyCard_Body card-body">
 						<Card.Title>
 							<Row>
-								<Col lg="10">{props.Title}</Col>
-								<Col lg="2" style={{color: "orange"}}>{props.Rating} <span>&#9733;</span></Col>
+								<Col lg="1" className="MyCard_NR text-center">{props.ID}</Col>
+								<Col lg="9" className="MyCard_Title">{props.Title}</Col>
+								<Col lg="2" className="MyCard_Rating">{props.Rating} <span>&#9733;</span></Col>
 							</Row>
 						</Card.Title>
 						<div className="p-2">
