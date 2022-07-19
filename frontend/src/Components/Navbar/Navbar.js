@@ -8,7 +8,7 @@ import ThemeContext from "../../Context/ThemeContext";
 import './Navbar.css';
 
 // Code
-function MyNavBar (props) {
+function MyNavBar () {
     const {theme, setTheme} = useContext(ThemeContext);
 	const changeTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
@@ -39,15 +39,9 @@ function MyNavBar (props) {
                             <Button variant="outline-warning">Wyszukaj</Button>
                             </Form>
                         <Nav >
-                            {!props.token && props.token !== "" && props.token !== undefined?
-                                <LinkContainer to="/login">
-                                    <Nav.Link className="ps-4">Zaloguj</Nav.Link>
-                                </LinkContainer>
-                            :(
-                                <LinkContainer to="/profile">
-                                    <Nav.Link className="ps-4">Profil</Nav.Link>
-                                </LinkContainer>
-                            )}
+                            <LinkContainer to="/login">
+                                <Nav.Link className="ps-4">Zaloguj</Nav.Link>
+                            </LinkContainer>
                         </Nav>
                         <Nav >
                             <Container>
