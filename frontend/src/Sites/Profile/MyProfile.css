@@ -1,0 +1,17 @@
+#MyProfile {
+    background-color: var(--my-background-secondary);
+    border-radius: 10vh;
+}
+
+#MyProfile .MyProfile_Logo {
+    font-size: 10vw;
+}
+
+#MyProfile .MyProfile_Header {
+    color: var(--my-accent-primary);
+}
+
+#MyProfile .MyProfile_Info_Title {
+    font-size: 2vh;
+    font-weight: bold;
+}

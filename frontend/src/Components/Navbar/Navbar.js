@@ -8,7 +8,7 @@ import ThemeContext from "../../Context/ThemeContext";
 import './Navbar.css';
 
 // Code
-function MyNavBar () {
+function MyNavBar (props) {
     const {theme, setTheme} = useContext(ThemeContext);
 	const changeTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
@@ -37,13 +37,21 @@ function MyNavBar () {
                         <Form className="d-flex">
                             <FormControl type="search" placeholder="Fraza" className="me-2" aria-label="Search" />
                             <Button variant="outline-warning">Wyszukaj</Button>
-                            </Form>
-                        <Nav >
-                            <LinkContainer to="/login">
-                                <Nav.Link className="ps-4">Zaloguj</Nav.Link>
-                            </LinkContainer>
-                        </Nav>
-                        <Nav >
+                        </Form>
+                        {!props.token && props.token !== "" && props.token !== undefined?
+                            <Nav>
+                                <LinkContainer to="/login">
+                                    <Nav.Link className="ps-4">Zaloguj</Nav.Link>
+                                </LinkContainer>
+                            </Nav>
+                            :(
+                            <Nav>
+                                <LinkContainer to="/profile">
+                                    <Nav.Link className="ps-4">Profil</Nav.Link>
+                                </LinkContainer>
+                            </Nav>
+                            )}
+                        <Nav>
                             <Container>
                                 <Nav.Link onClick={changeTheme} className="ps-4"><span className={theme_icon}></span></Nav.Link>
                             </Container>

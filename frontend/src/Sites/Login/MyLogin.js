@@ -6,7 +6,7 @@ import {Container, Form} from "react-bootstrap";
 import './MyLogin.css';
 
 // Code
-export default function MyLogin() {
+export default function MyLogin(props) {
 	const [error, setError] = useState(null);
 	const [result, setResult] = useState(null);
 
@@ -24,9 +24,11 @@ export default function MyLogin() {
             .then(res => res.json())
             .then(
 				(result) => {
-					console.log(result);
+					props.setToken(result.access_token);
+					console.log(result.access_token);
 					setResult(result.success);
 					setError(result.error);
+
                 },
 
                 (error) => {

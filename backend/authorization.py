@@ -1,10 +1,8 @@
-import json
 import hashlib
 
-from datetime import datetime, timezone, timedelta
 from flask import jsonify, Blueprint, request
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, set_access_cookies, \
-    unset_jwt_cookies, get_jwt
+    unset_jwt_cookies
 
 import core
 import models
@@ -71,15 +69,12 @@ def login():
             if user.Is_Active == 0:
                 return jsonify({"error": "User is not active"}), 400
 
-            additional_claims = {
-                'ID': models.User.query.filter_by(Username=username).first().ID,
-                'Username': models.User.query.filter_by(Username=username).first().Username,
-                'Email': models.User.query.filter_by(Username=username).first().Email,
-            }
-
-            access_token = create_access_token(identity=username, additional_claims=additional_claims)
-            response = jsonify({"success": "login successful", "access_token": access_token, "user": username})
+            access_token = create_access_token(identity=username)
+            response = jsonify({
+                "access_token": access_token,
+            })
             set_access_cookies(response, access_token)
+            print(response, access_token)
             return response, 200
         else:
             return jsonify({"error": "Wprowadzono błędne dane"}), 401
@@ -110,19 +105,17 @@ def activate(id, key):
         return jsonify({'msg': error}), 500
 
 
-@authorization_blueprint.route('/protected', methods=['GET'])
-@jwt_required()
-def protected():
-    current_user = get_jwt_identity()
-    claims = get_jwt()
-    return jsonify(current_user, claims), 200
-
 @authorization_blueprint.route('/profile', methods=['GET'])
 @jwt_required()
 def profile():
-    response_body = {
-        "name": "Nagato",
-        "about" :"Hello! I'm a full stack developer that loves python and javascript"
-    }
+    current_user = get_jwt_identity()
+    userData = models.User.query.filter_by(Username=current_user).first()
+    response = jsonify({
+        "username": userData.Username,
+        "email": userData.Email,
+    })
+    print(response)
+    return response, 200
 
-    return response_body, 200
+
+
