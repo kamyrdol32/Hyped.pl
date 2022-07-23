@@ -1,41 +1,39 @@
 // Imports
 import React, {useState} from 'react';
 import {Container, Form} from "react-bootstrap";
+import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 // CSS
-import './MyLogin.css';
+import '../Styles/MyLogin.css';
 
 // Code
 export default function MyLogin(props) {
-	const [error, setError] = useState(null);
-	const [result, setResult] = useState(null);
+
+	const navigate = useNavigate();
 
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
-	function sendData() {
-		fetch("/auth/login", {
+	async function fetchLogin() {
+		const response = await fetch('/auth/login', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({"username": username, "password": password})
-		})
-            .then(res => res.json())
-            .then(
-				(result) => {
-					props.setToken(result.access_token);
-					console.log(result.access_token);
-					setResult(result.success);
-					setError(result.error);
-
-                },
-
-                (error) => {
-                    setError(error);
-                    console.log(error);
-                }
-			);
+			body: JSON.stringify({
+				username: username,
+				password: password,
+			}),
+		});
+		const data = await response.json();
+		if (response.status === 200) {
+			props.setToken(data.access_token);
+			navigate('/');
+			toast.success("Zalogowano pomyslnie!");
+		} else {
+			toast.error(data.error);
+		}
 	}
 
 	return(
@@ -55,10 +53,8 @@ export default function MyLogin(props) {
 						<Form.Control type="password" onChange={event => setPassword(event.target.value)} />
 					</Form.Group>
 					<Form.Group controlId="MySubmit" className="m-3 p-3 pb-0 mb-2 text-center">
-						<Form.Control type="button" value="Zaloguj" onClick={sendData} />
+						<Form.Control type="button" value="Zaloguj" onClick={fetchLogin} />
 					</Form.Group>
-					<div className="MyLogin_Return text-center text-success pb-4 fw-bolder">{result}</div>
-					<div className="MyLogin_Return text-center text-danger pb-4 fw-bolder">{error}</div>
 				</Form>
 			</Container>
 			<Container className="col-md-4 p-3">

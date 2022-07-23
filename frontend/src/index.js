@@ -9,7 +9,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import App from './App';
 
 // CSS
-import './index.css';
+import './Styles/index.css';
 
 // CSS
 const root = ReactDOM.createRoot(document.getElementById('root'));

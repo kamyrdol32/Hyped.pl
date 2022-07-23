@@ -2,11 +2,11 @@
 import React, {useEffect, useState} from 'react';
 
 // Components
-import MyLoader from './../../Components/Loader/MyLoader';
-import MyCard from "../../Components/Card/MyCard";
+import MyLoader from '../Components/MyLoader';
+import MyCard from "../Components/MyCard";
 
 // CSS
-import './MyFilmList.css';
+import '../Styles/MyFilmList.css';
 import {Container} from "react-bootstrap";
 
 // Code

@@ -5,7 +5,7 @@ import React from 'react';
 
 
 // CSS
-import './MyLoader.css';
+import '../Styles/MyLoader.css';
 
 // Code
 export default function MyLoader() {

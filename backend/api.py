@@ -13,28 +13,6 @@ def create_db():
     return jsonify({'msg': 'Database created'})
 
 
-@api_blueprint.route('/films/add')
-def add_film():
-    try:
-        film = models.Film(
-            Title='Film ' + str(randrange(1, 100)),
-            Year=randrange(1900, 2020),
-            Director='Director ' + str(randrange(1, 100)),
-            Country='Country ' + str(randrange(1, 100)),
-            Genre='Genre ' + str(randrange(1, 100)),
-            Rating=randrange(1, 10),
-            Description='Description ' + str(randrange(1, 100)),
-            Image='Image ' + str(randrange(1, 100)),
-            URL='URL ' + str(randrange(1, 100))
-        )
-        core.db.session.add(film)
-        core.db.session.commit()
-        return jsonify('Film added - ' + film.Title), 201
-    except Exception as error:
-        print(error)
-        return jsonify('Error'), 500
-
-
 @api_blueprint.route('/films/get')
 @api_blueprint.route('/films/get/<nr>')
 def get_films(nr=1):
@@ -45,6 +23,7 @@ def get_films(nr=1):
             "ID": Data.ID,
             "Title": Data.Title,
             "Year": Data.Year,
+            "Duration": Data.Duration,
             "Director": Data.Director,
             "Country": Data.Country,
             "Genre": Data.Genre,
@@ -66,6 +45,7 @@ def get_film(nr=False):
             "ID": Film.ID,
             "Title": Film.Title,
             "Year": Film.Year,
+            "Duration": Film.Duration,
             "Director": Film.Director,
             "Country": Film.Country,
             "Genre": Film.Genre,
@@ -78,15 +58,22 @@ def get_film(nr=False):
         return jsonify('Error'), 500
 
 
-@api_blueprint.route('/films/delete/<nr>')
-def delete_film(nr):
-    try:
-        Film = models.Film.query.filter_by(ID=nr).first()
-        core.db.session.delete(Film)
-        core.db.session.commit()
-        # print('Film deleted - ', Film.Title)
-        return jsonify('Film deleted - ' + Film.Title), 200
-    except Exception as error:
-        print(error)
-        return jsonify('Film not found'), 404
-
+@api_blueprint.route('/comments/get/<nr>')
+def get_film_comments(nr=False):
+    if nr:
+        print("Film Comments get - " + str(nr))
+        Comments = models.Film_Comment.query.filter_by(Film_ID=nr)
+        Table = []
+        for Comment in Comments:
+            Table.append({
+                "ID": Comment.ID,
+                "Film_ID": Comment.Film_ID,
+                "User_ID": Comment.User_ID,
+                "User": models.User.query.filter_by(ID=Comment.User_ID).first().Username,
+                "Comment": Comment.Comment,
+                "Rate": Comment.Rate,
+                "Date": Comment.Date,
+            })
+        return jsonify(Table), 200
+    else:
+        return jsonify('Error'), 500

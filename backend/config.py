@@ -10,7 +10,7 @@ JSON_SORT_KEYS = False
 
 # JWT
 JWT_SECRET_KEY = 'fgdR@#TRH#^4E'
-JWT_ACCESS_TOKEN_EXPIRES = timedelta(seconds=10)
+JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=10)
 
 
 # Email

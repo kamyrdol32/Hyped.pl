@@ -3,23 +3,23 @@ import React from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ThemeContext from "./Context/ThemeContext";
 import useLocalStorage from "use-local-storage";
-import useToken from "./JWT";
+import useToken from "./Utils/JWT";
 import {Container} from "react-bootstrap";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // Components
-import MyNavBar from "./Components/Navbar/Navbar";
-import MyHome from "./Sites/Home/MyHome";
-import MyFilmList from "./Sites/FilmList/MyFilmList";
-import MyFilm from "./Sites/Film/MyFilm";
-import MyLogin from "./Sites/Login/MyLogin";
-import MyRegister from "./Sites/Register/MyRegister";
-import MyProfile from "./Sites/Profile/MyProfile";
+import MyNavBar from "./Components/Navbar";
+import MyHome from "./Sites/MyHome";
+import MyFilmList from "./Sites/MyFilmList";
+import MyFilm from "./Sites/MyFilm";
+import MyLogin from "./Sites/MyLogin";
+import MyRegister from "./Sites/MyRegister";
+import MyProfile from "./Sites/MyProfile";
 
 // CSS
-import './App.css';
+import './Styles/App.css';
 
 
 // Code
@@ -47,7 +47,7 @@ export default function App() {
 						<Routes>
 							<Route path="/" element={<MyHome />} />
 							<Route path="/films" element={<MyFilmList />} />
-							<Route path="/film/:ID" element={<MyFilm />} />
+							<Route path="/film/:ID" element={<MyFilm token={token} />} />
 
 							<Route path="/login" element={<MyLogin setToken={setToken} />} />
 							<Route path="/register" element={<MyRegister />} />

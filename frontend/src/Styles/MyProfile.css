@@ -15,3 +15,9 @@
     font-size: 2vh;
     font-weight: bold;
 }
+
+#MyProfile .MyProfile_Logout button {
+    background-color: var(--my-accent-primary);
+    border: var(--my-accent-secondary);
+    color: var(--my-accent-secondary);
+}

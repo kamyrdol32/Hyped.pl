@@ -32,6 +32,7 @@ class Film(db.Model):
     ID = db.Column(db.Integer, primary_key=True)
     Title = db.Column(db.String(80), nullable=True)
     Year = db.Column(db.Integer, nullable=True)
+    Duration = db.Column(db.Integer, nullable=True)
     Director = db.Column(db.String(80), nullable=True)
     Country = db.Column(db.String(80), nullable=True)
     Genre = db.Column(db.String(80), nullable=True)
@@ -40,9 +41,10 @@ class Film(db.Model):
     Image = db.Column(db.String(1000), nullable=True)
     URL = db.Column(db.String(1000), nullable=True)
 
-    def __init__(self, Title, Year, Director, Country, Genre, Rating, Description, Image, URL):
+    def __init__(self, Title, Year, Duration, Director, Country, Genre, Rating, Description, Image, URL):
         self.Title = Title
         self.Year = Year
+        self.Duration = Duration
         self.Director = Director
         self.Country = Country
         self.Genre = Genre
@@ -65,12 +67,14 @@ class Film_Comment(db.Model):
     Film_ID = db.Column(db.Integer, db.ForeignKey('Films.ID'))
     User_ID = db.Column(db.Integer, db.ForeignKey('Users.ID'))
     Comment = db.Column(db.String(1000), nullable=True)
+    Rate = db.Column(db.Integer, nullable=True)
     Date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
 
-    def __init__(self, Film_ID, User_ID, Comment, Date):
+    def __init__(self, Film_ID, User_ID, Comment, Rate, Date):
         self.Film_ID = Film_ID
         self.User_ID = User_ID
         self.Comment = Comment
+        self.Rate = Rate
         self.Date = Date
         print('Film comment created -', self.Comment)
 

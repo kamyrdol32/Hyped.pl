@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {Container, Form} from "react-bootstrap";
 
 // CSS
-import './MyRegister.css';
+import '../Styles/MyRegister.css';
 
 // Code
 export default function MyRegister() {

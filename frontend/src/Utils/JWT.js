@@ -7,8 +7,10 @@ function useToken() {
 
 	function getToken() {
 		const userToken = localStorage.getItem('token') || null;
-		if (userToken) {
-			if (jwt_decode (userToken).exp * 1000 < Date.now ()) {
+		if (userToken === null || userToken === false || userToken === "undefined" || userToken === "null"  || userToken === "false") {
+			return false;
+		} else {
+			if (jwt_decode(userToken).exp * 1000 < Date.now ()) {
 				localStorage.removeItem("token");
 				return false;
 			}

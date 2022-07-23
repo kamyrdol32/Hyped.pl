@@ -2,10 +2,10 @@
 import React, {useContext} from 'react';
 import {Button, Container, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
-import ThemeContext from "../../Context/ThemeContext";
+import ThemeContext from "../Context/ThemeContext";
 
 // CSS
-import './Navbar.css';
+import '../Styles/Navbar.css';
 
 // Code
 function MyNavBar (props) {
@@ -38,7 +38,7 @@ function MyNavBar (props) {
                             <FormControl type="search" placeholder="Fraza" className="me-2" aria-label="Search" />
                             <Button variant="outline-warning">Wyszukaj</Button>
                         </Form>
-                        {!props.token && props.token !== "" && props.token !== undefined?
+                        {!props.token && props.token !== "" && props.token !== "undefined"?
                             <Nav>
                                 <LinkContainer to="/login">
                                     <Nav.Link className="ps-4">Zaloguj</Nav.Link>

@@ -1,9 +1,9 @@
 // Imports
 import React, {useContext} from 'react';
-import themeContext from "../../Context/ThemeContext";
+import themeContext from "../Context/ThemeContext";
 
 // CSS
-import './MyHome.css';
+import '../Styles/MyHome.css';
 import {Container} from "react-bootstrap";
 
 // Code
