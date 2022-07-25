@@ -1,11 +1,12 @@
-#MyFilm_Title, #MyFilm_Comments, #MyFilm_CommentsList, .MyFilm_Description {
+#MyFilm_Title, #MyFilm_Comments, #MyFilm_Rate, #MyFilm_Header, .MyFilm_Description {
     background-color: var(--my-background-secondary);
     border-radius: 20px;
 }
 
-#MyFilm_Title, #MyFilm_Comments {
+.MyFilm_Title {
     font-size: 30px;
     font-weight: bolder;
+    color: var(--my-accent-primary);
 }
 
 #MyFilm #MyFilm_Body .MyFilm_Image img{
@@ -17,13 +18,17 @@
     font-weight: lighter;
 }
 
-#MyFilm #MyFilm_CommentsList textarea {
+#MyFilm #MyFilm_Comments textarea {
     background-color: var(--my-background-primary);
     color: var(--my-text-primary);
 }
 
-#MyFilm #MyFilm_CommentsList button {
+#MyFilm #MyFilm_Comments button {
     background-color: var(--my-background-primary);
     color: var(--my-text-secondary);
     border: var(--my-accent-primary) solid 1px;
+}
+
+.MyFilm_Username {
+    color: var(--my-accent-primary);
 }

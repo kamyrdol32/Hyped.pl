@@ -52,7 +52,7 @@ export default function MyLogin(props) {
 						<Form.Label>Hasło</Form.Label>
 						<Form.Control type="password" onChange={event => setPassword(event.target.value)} />
 					</Form.Group>
-					<Form.Group controlId="MySubmit" className="m-3 p-3 pb-0 mb-2 text-center">
+					<Form.Group controlId="MySubmit" className="m-3 p-3 pb-0 text-center">
 						<Form.Control type="button" value="Zaloguj" onClick={fetchLogin} />
 					</Form.Group>
 				</Form>

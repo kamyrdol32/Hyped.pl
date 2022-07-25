@@ -47,7 +47,7 @@ export default function App() {
 						<Routes>
 							<Route path="/" element={<MyHome />} />
 							<Route path="/films" element={<MyFilmList />} />
-							<Route path="/film/:ID" element={<MyFilm token={token} />} />
+							<Route path="/film/:ID" element={<MyFilm token={token} setToken={setToken} />} />
 
 							<Route path="/login" element={<MyLogin setToken={setToken} />} />
 							<Route path="/register" element={<MyRegister />} />

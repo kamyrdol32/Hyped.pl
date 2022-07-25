@@ -102,7 +102,7 @@ def activate(id, key):
             return jsonify({'error': 'Bad activation key'})
     except Exception as error:
         core.app.logger.error(error)
-        return jsonify({'msg': error}), 500
+        return jsonify({'error': error}), 500
 
 
 @authorization_blueprint.route('/profile', methods=['GET'])

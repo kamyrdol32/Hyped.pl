@@ -18,7 +18,7 @@ class User(db.Model):
         self.Is_Active = Is_Active
         self.Is_Admin = Is_Admin
 
-        print('User created -', self.Username)
+        print("[Models] User created - " + str(self.Username))
 
     def __repr__(self):
         return '<User %r>' % self.Username
@@ -29,6 +29,40 @@ class User(db.Model):
 
 class Film(db.Model):
     __tablename__ = 'Films'
+    ID = db.Column(db.Integer, primary_key=True)
+    Title = db.Column(db.String(128), nullable=True)
+    Year = db.Column(db.Integer, nullable=True)
+    Duration = db.Column(db.Integer, nullable=True)
+    Director = db.Column(db.String(128), nullable=True)
+    Country = db.Column(db.String(128), nullable=True)
+    Genre = db.Column(db.String(128), nullable=True)
+    Rating = db.Column(db.Float, nullable=True)
+    Description = db.Column(db.String(1000), nullable=True)
+    Image = db.Column(db.String(1000), nullable=True)
+    URL = db.Column(db.String(1000), nullable=True)
+
+    def __init__(self, Title, Year, Duration, Director, Country, Genre, Rating, Description, Image, URL):
+        self.Title = Title
+        self.Year = Year
+        self.Duration = Duration
+        self.Director = Director
+        self.Country = Country
+        self.Genre = Genre
+        self.Rating = Rating
+        self.Description = Description
+        self.Image = Image
+        self.URL = URL
+        print('[Models] Film created -', self.Title)
+
+    def __repr__(self):
+        return '<Film %r>' % self.Title
+
+    def __str__(self):
+        return self.Title
+
+
+class Serial(db.Model):
+    __tablename__ = 'Serials'
     ID = db.Column(db.Integer, primary_key=True)
     Title = db.Column(db.String(80), nullable=True)
     Year = db.Column(db.Integer, nullable=True)
@@ -52,7 +86,7 @@ class Film(db.Model):
         self.Description = Description
         self.Image = Image
         self.URL = URL
-        print('Film created -', self.Title)
+        print('[Models] Serial created -', self.Title)
 
     def __repr__(self):
         return '<Film %r>' % self.Title
@@ -61,22 +95,21 @@ class Film(db.Model):
         return self.Title
 
 
-class Film_Comment(db.Model):
-    __tablename__ = 'Films_Comments'
+class Comment(db.Model):
+    __tablename__ = 'Comments'
     ID = db.Column(db.Integer, primary_key=True)
-    Film_ID = db.Column(db.Integer, db.ForeignKey('Films.ID'))
     User_ID = db.Column(db.Integer, db.ForeignKey('Users.ID'))
+    Film_ID = db.Column(db.Integer, db.ForeignKey('Films.ID'), nullable=True)
+    Serial_ID = db.Column(db.Integer, db.ForeignKey('Serials.ID'), nullable=True)
     Comment = db.Column(db.String(1000), nullable=True)
-    Rate = db.Column(db.Integer, nullable=True)
     Date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
 
-    def __init__(self, Film_ID, User_ID, Comment, Rate, Date):
-        self.Film_ID = Film_ID
+    def __init__(self, User_ID, Film_ID, Serial_ID, Comment):
         self.User_ID = User_ID
+        self.Film_ID = Film_ID
+        self.Serial_ID = Serial_ID
         self.Comment = Comment
-        self.Rate = Rate
-        self.Date = Date
-        print('Film comment created -', self.Comment)
+        print('[Models] Comment created -', self.Comment)
 
     def __repr__(self):
         return '<Film comment %r>' % self.Comment
@@ -85,33 +118,23 @@ class Film_Comment(db.Model):
         return self.Comment
 
 
-class Serials(db.Model):
-    __tablename__ = 'Serials'
+class Rating(db.Model):
+    __tablename__ = 'Rates'
     ID = db.Column(db.Integer, primary_key=True)
-    Title = db.Column(db.String(80), unique=True, nullable=False)
-    Year = db.Column(db.Integer, nullable=True)
-    Director = db.Column(db.String(80), nullable=True)
-    Country = db.Column(db.String(80), nullable=True)
-    Genre = db.Column(db.String(80), nullable=True)
-    Rating = db.Column(db.Float, nullable=True)
-    Description = db.Column(db.String(1000), nullable=True)
-    Image = db.Column(db.String(1000), nullable=True)
-    URL = db.Column(db.String(1000), nullable=True)
+    User_ID = db.Column(db.Integer, db.ForeignKey('Users.ID'))
+    Film_ID = db.Column(db.Integer, db.ForeignKey('Films.ID'), nullable=True)
+    Serial_ID = db.Column(db.Integer, db.ForeignKey('Serials.ID'), nullable=True)
+    Rate = db.Column(db.Integer, nullable=True)
 
-    def __init__(self, Title, Year, Director, Country, Genre, Rating, Description, Image, URL):
-        self.Title = Title
-        self.Year = Year
-        self.Director = Director
-        self.Country = Country
-        self.Genre = Genre
-        self.Rating = Rating
-        self.Description = Description
-        self.Image = Image
-        self.URL = URL
-        print('Serial created -', self.title)
+    def __init__(self, User_ID, Film_ID, Serial_ID, Rate):
+        self.User_ID = User_ID
+        self.Film_ID = Film_ID
+        self.Serial_ID = Serial_ID
+        self.Rate = Rate
+        print("[Models] Rating created -", self.Rate)
 
     def __repr__(self):
-        return '<Serial %r>' % self.title
+        return '<Film rate %r>' % self.Rate
 
     def __str__(self):
-        return self.title
+        return self.Rate

@@ -9,7 +9,7 @@ import '../Styles/MyCard.css';
 // Components
 
 // Code
-function MyCard(props) {
+export default function MyCard(props) {
 	return (
 		<Container>
 			<Row className="justify-content-center p-3">
@@ -47,5 +47,3 @@ function MyCard(props) {
 		</Container>
 	)
 }
-
-export default MyCard;

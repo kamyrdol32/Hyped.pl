@@ -18,7 +18,12 @@ export default function MyProfile(props) {
 	const navigate = useNavigate();
 
 	const [isLogged, setIsLogged] = useState(false);
-    const { isLoading, error, data } = useQuery(['Profile'], fetchProfile);
+    const { isLoading, error, data } = useQuery(['Profile'], fetchProfile, {
+		onSuccess: (data) => {
+			props.setToken(data.access_token);
+		}
+	});
+
 
 	async function fetchProfile() {
 		const response = await fetch('/auth/profile', {
@@ -32,11 +37,14 @@ export default function MyProfile(props) {
 			toast.error("Prosze sie zalogowac!");
 			props.setToken();
 			navigate('/login');
-		} else {
+		}
+		if (response.status === 200) {
 			setIsLogged(true);
 		}
 		return response.json();
 	}
+
+	console.log(data);
 
 	async function fetchLogout() {
 		const response = await fetch('/auth/logout', {
