@@ -1,4 +1,4 @@
-#MyProfile {
+#MyProfile, #MyProfile_Films {
     background-color: var(--my-background-secondary);
     border-radius: 10vh;
 }
@@ -7,7 +7,7 @@
     font-size: 10vw;
 }
 
-#MyProfile .MyProfile_Header {
+.MyProfile_Header, .MyProfile_Films_Header {
     color: var(--my-accent-primary);
 }
 

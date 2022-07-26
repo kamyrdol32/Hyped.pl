@@ -1,4 +1,3 @@
-from random import randrange
 from flask import jsonify, Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
@@ -12,6 +11,7 @@ api_blueprint = Blueprint('api', __name__, )
 def create_db():
     core.db.create_all()
     return jsonify({'msg': 'Database created'})
+
 
 ##########
 # Films
@@ -60,6 +60,7 @@ def get_film(nr=False):
         })
     else:
         return jsonify('Error'), 500
+
 
 ##########
 # Comments
@@ -125,6 +126,7 @@ def add_film_comments(nr=False):
     except Exception as error:
         return jsonify({'error': str(error)}), 500
 
+
 ##########
 # Rating
 ##########
@@ -135,7 +137,8 @@ def get_film_rating(nr=False):
     current_user = get_jwt_identity()
     if nr and current_user:
         print("[GET] Rating - " + str(nr))
-        Rating = models.Rating.query.filter_by(Film_ID=nr, User_ID=models.User.query.filter_by(Username=current_user).first().ID).first()
+        Rating = models.Rating.query.filter_by(Film_ID=nr, User_ID=models.User.query.filter_by(
+            Username=current_user).first().ID).first()
         if Rating:
             return jsonify({
                 "ID": Rating.ID,
@@ -153,6 +156,28 @@ def get_film_rating(nr=False):
     else:
         return jsonify('Error'), 500
 
+
+@api_blueprint.route('/rating/get_all')
+@jwt_required()
+def get_all_film_rating():
+    current_user = get_jwt_identity()
+    if current_user:
+        print("[GET] All user Rating")
+        Ratings = models.Rating.query.filter_by(User_ID=models.User.query.filter_by(
+            Username=current_user).first().ID)
+        Table = []
+        for Rating in Ratings:
+            Table.append({
+                "ID": Rating.ID,
+                "Film_ID": Rating.Film_ID,
+                "Film_Name": models.Film.query.filter_by(ID=Rating.Film_ID).first().Title,
+                "Rating": Rating.Rate,
+            })
+        return jsonify(Table), 200
+    else:
+        return jsonify('Error'), 500
+
+
 @api_blueprint.route('/rating/add/<nr>', methods=['POST'])
 @jwt_required()
 def add_film_rating(nr=False):
@@ -169,8 +194,10 @@ def add_film_rating(nr=False):
             Rating = []
 
             if type == "film":
-                if models.Rating.query.filter_by(Film_ID=nr, User_ID=models.User.query.filter_by(Username=current_user).first().ID).first():
-                    Rating = models.Rating.query.filter_by(Film_ID=nr, User_ID=models.User.query.filter_by(Username=current_user).first().ID).first()
+                if models.Rating.query.filter_by(Film_ID=nr, User_ID=models.User.query.filter_by(
+                        Username=current_user).first().ID).first():
+                    Rating = models.Rating.query.filter_by(Film_ID=nr, User_ID=models.User.query.filter_by(
+                        Username=current_user).first().ID).first()
                     Rating.Rate = rating
                     core.db.session.commit()
                     return jsonify({'success': 'Rating refreshed'}), 200
@@ -183,8 +210,10 @@ def add_film_rating(nr=False):
                     )
 
             if type == "serial":
-                if models.Rating.query.filter_by(Serial_ID=nr, User_ID=models.User.query.filter_by(Username=current_user).first().ID).first():
-                    Rating = models.Rating.query.filter_by(Serial_ID=nr, User_ID=models.User.query.filter_by(Username=current_user).first().ID).first()
+                if models.Rating.query.filter_by(Serial_ID=nr, User_ID=models.User.query.filter_by(
+                        Username=current_user).first().ID).first():
+                    Rating = models.Rating.query.filter_by(Serial_ID=nr, User_ID=models.User.query.filter_by(
+                        Username=current_user).first().ID).first()
                     Rating.Rate = rating
                     core.db.session.commit()
                     return jsonify({'success': 'Rating refreshed'}), 200
@@ -202,3 +231,5 @@ def add_film_rating(nr=False):
             return jsonify('error'), 500
     except Exception as error:
         return jsonify({'error': str(error)}), 500
+
+

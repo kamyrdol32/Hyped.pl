@@ -25,14 +25,12 @@ export default function MyFilm(props) {
 
 	const dataFilm = useQuery(['Film'], fetchFilmData);
 	const dataComments = useQuery(['Comments'], fetchCommentsData);
-	const dataRating = useQuery(['Rating'], fetchFilmRate, {
+	useQuery(['Rating'], fetchFilmRate, {
 		onSuccess: (data) => {
-			console.log(data)
 			setRating(data.Rating)
 			props.setToken(data.access_token);
 		}
 	});
-
 
 	async function fetchFilmData() {
 		const response = await fetch('/api/film/get/' + params.ID, {
@@ -126,13 +124,13 @@ export default function MyFilm(props) {
 	if (dataComments.error) return toast.error(dataComments.error);
 
 	return (
-		<Container id="MyFilm" className="p-5 ustify-content-center">
-			<Col xl="9" id="MyFilm_Header" className="p-3 m-3">
+		<Container id="MyFilm" className="p-3 m-0 ustify-content-center">
+			<Col xl="9" id="MyFilm_Header" className="p-3 m-0">
 				<Container className="MyFilm_Title text-center">{dataFilm.data.Title}</Container>
 			</Col>
-			<Col xl="9" id="MyFilm_Body" className="p-3 m-3 row">
-				<Col lg="4" className="MyFilm_Image text-center"><img src={dataFilm.data.Image} alt={dataFilm.data.Title}/></Col>
-				<Col lg="8" className="MyFilm_Description  m-0 p-4">
+			<Col xl="9" id="MyFilm_Body" className="p-3 m-0 row">
+				<Col lg="4" className="MyFilm_Image p-3 text-center"><img src={dataFilm.data.Image} alt={dataFilm.data.Title}/></Col>
+				<Col lg="8" className="MyFilm_Description p-3">
 					<div className="text-center">{dataFilm.data.Description}</div><br/>
 					<span className="fw-bold">Premiera:</span> {dataFilm.data.Year}<br/>
 					<span className="fw-bold">Reżyseria:</span> {dataFilm.data.Director}<br/>

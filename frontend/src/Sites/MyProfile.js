@@ -1,11 +1,11 @@
 // Imports
 import React, {useState} from 'react';
-import {Button, Container} from "react-bootstrap";
+import {Button, Col, Container} from "react-bootstrap";
 import {useQuery} from "@tanstack/react-query";
 import MyLoader from "../Components/MyLoader";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
-
+import MyProfileRating from "../Components/MyProfileRating";
 
 // CSS
 import '../Styles/MyProfile.css';
@@ -18,7 +18,8 @@ export default function MyProfile(props) {
 	const navigate = useNavigate();
 
 	const [isLogged, setIsLogged] = useState(false);
-    const { isLoading, error, data } = useQuery(['Profile'], fetchProfile, {
+	const dataRating = useQuery(['Rating'], fetchRating);
+    const dataProfile = useQuery(['Profile'], fetchProfile, {
 		onSuccess: (data) => {
 			props.setToken(data.access_token);
 		}
@@ -44,7 +45,21 @@ export default function MyProfile(props) {
 		return response.json();
 	}
 
-	console.log(data);
+	async function fetchRating() {
+		const response = await fetch('/api/rating/get_all', {
+			method: 'GET',
+			headers: {
+				Authorization: 'Bearer ' + props.token,
+				ContentType: 'application/json',
+			}
+		})
+		if (response.status === 422 || response.status === 401) {
+			toast.error("Prosze sie zalogowac!");
+			props.setToken();
+			navigate('/login');
+		}
+		return response.json();
+	}
 
 	async function fetchLogout() {
 		const response = await fetch('/auth/logout', {
@@ -59,12 +74,14 @@ export default function MyProfile(props) {
 		}
 	}
 
-	if (isLoading || !isLogged) return <MyLoader />
-	if (error) return toast.error(error);
+	if (dataProfile.isLoading || dataRating.isLoading || !isLogged) return <MyLoader />
+	if (dataProfile.error) return toast.error(dataProfile.error);
+	if (dataRating.error) return toast.error(dataRating.error);
 
 	return (
 		<Container className="p-5 justify-content-center row">
-			<Container id="MyProfile" className="col-md-8">
+
+			<Col md="9" id="MyProfile" className="p-3 m-3">
 				<h1 className="MyProfile_Logo text-center"><span className="MyProfile_Logo fa fa-user-circle"/></h1>
 				<h3 className="MyProfile_Header text-center">Mój profil</h3>
 				<Container className="MyProfile_Logout text-center p-3">
@@ -73,14 +90,24 @@ export default function MyProfile(props) {
 				<Container className="m-4">
 					<div className="MyProfile_Info p-3">
 						<div className="MyProfile_Info_Title">Username</div>
-						<div className="MyProfile_Info_Value">{data.username}</div>
+						<div className="MyProfile_Info_Value">{dataProfile.data.username}</div>
 					</div>
 					<div className="MyProfile_Info p-3">
 						<div className="MyProfile_Info_Title">Adres e-mail</div>
-						<div className="MyProfile_Info_Value">{data.email}</div>
+						<div className="MyProfile_Info_Value">{dataProfile.data.email}</div>
 					</div>
 				</Container>
-			</Container>
+			</Col>
+
+			<Col md="9" id="MyProfile_Films" className="p-3 m-3">
+				<h3 className="MyProfile_Films_Header text-center">Obejrzane filmy</h3>
+				<div className="MyProfile_Films_List p-3">
+					{dataRating.data.map((rating) => {
+						return <MyProfileRating key={rating.ID} ID={rating.Film_ID} Title={rating.Film_Name} Rating={rating.Rating}/>
+					})}
+				</div>
+			</Col>
+
 		</Container>
 	)
 }
