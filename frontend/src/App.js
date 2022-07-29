@@ -20,6 +20,8 @@ import MyProfile from "./Sites/MyProfile";
 
 // CSS
 import './Styles/App.css';
+import MySerialList from "./Sites/MySerialList";
+import MySerial from "./Sites/MySerial";
 
 
 // Code
@@ -47,7 +49,10 @@ export default function App() {
 						<Routes>
 							<Route path="/" element={<MyHome />} />
 							<Route path="/films" element={<MyFilmList />} />
+							<Route path="/serials" element={<MySerialList />} />
+
 							<Route path="/film/:ID" element={<MyFilm token={token} setToken={setToken} />} />
+							<Route path="/serial/:ID" element={<MySerial token={token} setToken={setToken} />} />
 
 							<Route path="/login" element={<MyLogin setToken={setToken} />} />
 							<Route path="/register" element={<MyRegister />} />

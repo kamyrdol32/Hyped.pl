@@ -6,6 +6,7 @@ import MyLoader from "../Components/MyLoader";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import MyProfileRating from "../Components/MyProfileRating";
+import {useTranslation} from "react-i18next";
 
 // CSS
 import '../Styles/MyProfile.css';
@@ -15,6 +16,7 @@ import '../Styles/MyProfile.css';
 export default function MyProfile(props) {
 
 	// States
+	const {t} = useTranslation();
 	const navigate = useNavigate();
 
 	const [isLogged, setIsLogged] = useState(false);
@@ -35,7 +37,7 @@ export default function MyProfile(props) {
 			}
 		})
 		if (response.status === 422 || response.status === 401) {
-			toast.error("Prosze sie zalogowac!");
+			toast.error(t("prosze_sie_zalogowac"));
 			props.setToken();
 			navigate('/login');
 		}
@@ -54,7 +56,7 @@ export default function MyProfile(props) {
 			}
 		})
 		if (response.status === 422 || response.status === 401) {
-			toast.error("Prosze sie zalogowac!");
+			toast.error(t("prosze_sie_zalogowac"));
 			props.setToken();
 			navigate('/login');
 		}
@@ -66,11 +68,11 @@ export default function MyProfile(props) {
 			method: 'GET',
 		})
 		if (response.status === 200) {
-			toast.success("Wylogowano pomyslnie!");
+			toast.success(t("wylogowano_pomyslnie"));
 			props.setToken();
 			navigate('/');
 		} else {
-			toast.error("Wystapil blad!");
+			toast.error("ERROR");
 		}
 	}
 
@@ -83,28 +85,28 @@ export default function MyProfile(props) {
 
 			<Col md="9" id="MyProfile" className="p-3 m-3">
 				<h1 className="MyProfile_Logo text-center"><span className="MyProfile_Logo fa fa-user-circle"/></h1>
-				<h3 className="MyProfile_Header text-center">Mój profil</h3>
+				<h3 className="MyProfile_Header text-center">{t("moj_profil")}</h3>
 				<Container className="MyProfile_Logout text-center p-3">
-					<Button onClick={fetchLogout}>Wyloguj</Button>
+					<Button onClick={fetchLogout}>{t("wyloguj")}</Button>
 				</Container>
 				<Container className="m-4">
 					<div className="MyProfile_Info p-3">
-						<div className="MyProfile_Info_Title">Username</div>
+						<div className="MyProfile_Info_Title">{t("nazwa_uzytkownika")}</div>
 						<div className="MyProfile_Info_Value">{dataProfile.data.username}</div>
 					</div>
 					<div className="MyProfile_Info p-3">
-						<div className="MyProfile_Info_Title">Adres e-mail</div>
+						<div className="MyProfile_Info_Title">E-mail</div>
 						<div className="MyProfile_Info_Value">{dataProfile.data.email}</div>
 					</div>
 				</Container>
 			</Col>
 
 			<Col md="9" id="MyProfile_Films" className="p-3 m-3">
-				<h3 className="MyProfile_Films_Header text-center">Obejrzane filmy</h3>
+				<h3 className="MyProfile_Films_Header text-center p-5">{t("obejrzano")}</h3>
 				<div className="MyProfile_Films_List p-3">
-					{dataRating.data.map((rating) => {
-						return <MyProfileRating key={rating.ID} ID={rating.Film_ID} Title={rating.Film_Name} Rating={rating.Rating}/>
-					})}
+					{dataRating.data.map((rating) => (
+						<MyProfileRating key={rating.ID} Type={rating.Type} ID={rating.DataID} Title={rating.DataName} Rating={rating.Rating}/>
+					))}
 				</div>
 			</Col>
 

@@ -10,20 +10,20 @@ import MyCardList from "../Components/MyCardList";
 
 
 // Code
-export default function MyFilmList() {
+export default function MySerialList() {
 
     let page = 1;
     const queryClient = useQueryClient()
 
-    const [films, setFilms] = useState([]);
-    const {isLoading, isError} = useQuery(['Films'], fetchFilms, {
+    const [serials, setSerials] = useState([]);
+    const {isLoading, isError} = useQuery(['Serials'], fetchSerials, {
         keepPreviousData: true,
         onSuccess: (data) => {
-            setFilms(oldFilms => [...oldFilms, ...data]);
+            setSerials(oldSerials => [...oldSerials, ...data]);
         }
     });
-    async function fetchFilms() {
-        const response = await fetch('/api/films/get/' + page)
+    async function fetchSerials() {
+        const response = await fetch('/api/serials/get/' + page)
         page++;
         return response.json();
     }
@@ -34,7 +34,7 @@ export default function MyFilmList() {
 
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
-            queryClient.invalidateQueries('Films')
+            queryClient.invalidateQueries('Serials')
             window.removeEventListener('scroll', handleScroll);
             setInterval(() => {
                 window.addEventListener('scroll', handleScroll);
@@ -48,8 +48,8 @@ export default function MyFilmList() {
     return (
         <Container>
             <Row>
-                {films.map(film => (
-                    <MyCardList key={film.ID} Type="Film" ID={film.ID} Image={film.Image} Title={film.Title} Rating={film.Rating} Description={film.Description} Year={film.Year} Director={film.Director} Country={film.Country} Genre={film.Genre} />
+                {serials.map(film => (
+                    <MyCardList key={film.ID} Type="Serial" ID={film.ID} Image={film.Image} Title={film.Title} Rating={film.Rating} Description={film.Description} Year={film.Year} Director={film.Director} Country={film.Country} Genre={film.Genre} />
                 ))}
             </Row>
         </Container>

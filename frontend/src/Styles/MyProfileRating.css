@@ -1,6 +1,6 @@
 .MyProfileRating_Title, .MyProfileRating_Title:hover, .MyProfileRating_Title:focus, .MyProfileRating_Title:active, .MyProfileRating_Title:visited {
     color: var(--my-text-primary);
     text-decoration: none;
-    font-size: 3vh;
+    font-size: 20px;
     font-weight: bold;
 }

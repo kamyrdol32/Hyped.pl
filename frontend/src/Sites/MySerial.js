@@ -12,10 +12,10 @@ import MyLoader from "../Components/MyLoader";
 import MyComments from "../Components/MyComments";
 
 // CSS
-import '../Styles/MyFilm.css';
+import '../Styles/MySerial.css';
 
 // Code
-export default function MyFilm(props) {
+export default function MySerial(props) {
 
 	const queryClient = useQueryClient()
 	const params = useParams()
@@ -25,40 +25,40 @@ export default function MyFilm(props) {
 	const [comment, setComment] = useState("");
 	const [rating, setRating] = useState(0)
 
-	const dataFilm = useQuery(['Film'], fetchFilmData);
+	const dataSerial = useQuery(['Serial'], fetchSerialData);
 	const dataComments = useQuery(['Comments'], fetchCommentsData);
-	useQuery(['Rating'], fetchFilmRate, {
+	useQuery(['Rating'], fetchSerialRate, {
 		onSuccess: (data) => {
 			setRating(data.Rating)
 			props.setToken(data.access_token);
 		}
 	});
 
-	async function fetchFilmData() {
-		const response = await fetch('/api/film/get/' + params.ID, {
+	async function fetchSerialData() {
+		const response = await fetch('/api/serial/get/' + params.ID, {
 			method: 'GET',
 		})
 		if (response.status === 404) {
-			toast.error(t("film_nie_istnieje"));
+			toast.error(t("serial_nie_istnieje"));
 			navigate('/');
 		}
 		return response.json();
 	}
 
 	async function fetchCommentsData() {
-		const response = await fetch('/api/comments/get/film/' + params.ID, {
+		const response = await fetch('/api/comments/get/serial/' + params.ID, {
 			method: 'GET',
 		})
 		if (response.status === 404 || response.status === 401) {
-			toast.error(t("film_nie_istnieje"));
+			toast.error(t("serial_nie_istnieje"));
 			navigate('/');
 		}
 		return response.json();
 	}
 
-	async function fetchFilmRate() {
+	async function fetchSerialRate() {
 		if (props.token) {
-			const response = await fetch('/api/rating/get/film/' + params.ID, {
+			const response = await fetch('/api/rating/get/serial/' + params.ID, {
 				method: 'GET',
 				headers: {
 					Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -66,7 +66,7 @@ export default function MyFilm(props) {
 				}
 			})
 			if (response.status === 404) {
-				toast.error(t("film_nie_istnieje"));
+				toast.error(t("serial_nie_istnieje"));
 				navigate('/');
 			}
 			if (response.status === 403) {
@@ -86,11 +86,11 @@ export default function MyFilm(props) {
 			},
 			body: JSON.stringify({
 				comment: comment,
-				type: "film",
+				type: "serial",
 			}),
 		})
 		if (response.status === 404 || response.status === 401) {
-			toast.error(t("film_nie_istnieje"));
+			toast.error(t("serial_nie_istnieje"));
 			navigate('/');
 		}
 		if (response.status === 200) {
@@ -111,36 +111,35 @@ export default function MyFilm(props) {
 			},
 			body: JSON.stringify({
 				rating: rating,
-				type: "film",
+				type: "serial",
 			}),
 		})
 		if (response.status === 404 || response.status === 401) {
-			toast.error(t("film_nie_istnieje"));
+			toast.error(t("serial_nie_istnieje"));
 			navigate('/');
 		}
 		if (response.status === 200) {
-			toast.success(t("ocena_dodana"));
+			toast.success("Ocena została dodana!");
 		}
 	}
 
-	if (dataFilm.isLoading || dataComments.isLoading) return <MyLoader />
-	if (dataFilm.error) return toast.error(dataFilm.error);
+	if (dataSerial.isLoading || dataComments.isLoading) return <MyLoader />
+	if (dataSerial.error) return toast.error(dataSerial.error);
 	if (dataComments.error) return toast.error(dataComments.error);
 
 	return (
 		<Container id="MyFilm" className="p-3 m-0 ustify-content-center">
 			<Col xl="9" id="MyFilm_Header" className="p-3 m-0">
-				<Container className="MyFilm_Title text-center">{dataFilm.data.Title}</Container>
+				<Container className="MyFilm_Title text-center">{dataSerial.data.Title}</Container>
 			</Col>
 			<Col xl="9" id="MyFilm_Body" className="p-3 m-0 row">
-				<Col lg="4" className="MyFilm_Image p-3 text-center"><Image src={dataFilm.data.Image} alt={dataFilm.data.Title}/></Col>
+				<Col lg="4" className="MyFilm_Image p-3 text-center"><Image src={dataSerial.data.Image} alt={dataSerial.data.Title}/></Col>
 				<Col lg="8" className="MyFilm_Description p-3">
-					<div className="text-center">{dataFilm.data.Description}</div><br/>
-					<span className="fw-bold">{t("premiera")}:</span> {dataFilm.data.Year}<br/>
-					<span className="fw-bold">{t("rezyseria")}:</span> {dataFilm.data.Director}<br/>
-					<span className="fw-bold">{t("gatunek")}:</span> {dataFilm.data.Genre}<br/>
-					<span className="fw-bold">{t("czas_trwania")}:</span> {dataFilm.data.Duration} min<br/>
-					<span className="fw-bold">Filmweb:</span> <a href={"https://www.filmweb.pl" + dataFilm.data.URL}>Link</a><br/>
+					<div className="text-center">{dataSerial.data.Description}</div><br/>
+					<span className="fw-bold">{t("premiera")}:</span> {dataSerial.data.Year}<br/>
+					<span className="fw-bold">{t("gatunek")}:</span> {dataSerial.data.Genre}<br/>
+					<span className="fw-bold">{t("czas_trwania")}:</span> {dataSerial.data.Duration} min<br/>
+					<span className="fw-bold">Filmweb:</span> <a href={"https://www.filmweb.pl" + dataSerial.data.URL}>Link</a><br/>
 				</Col>
 			</Col>
 

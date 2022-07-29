@@ -45,32 +45,85 @@ def get_film(nr=False):
     if nr:
         print("[GET] Film - " + str(nr))
         Film = models.Film.query.filter_by(ID=nr).first()
-        return jsonify({
-            "ID": Film.ID,
-            "Title": Film.Title,
-            "Year": Film.Year,
-            "Duration": Film.Duration,
-            "Director": Film.Director,
-            "Country": Film.Country,
-            "Genre": Film.Genre,
-            "Rating": Film.Rating,
-            "Description": Film.Description,
-            "Image": Film.Image,
-            "URL": Film.URL,
-        })
+        if Film:
+            return jsonify({
+                "ID": Film.ID,
+                "Title": Film.Title,
+                "Year": Film.Year,
+                "Duration": Film.Duration,
+                "Director": Film.Director,
+                "Country": Film.Country,
+                "Genre": Film.Genre,
+                "Rating": Film.Rating,
+                "Description": Film.Description,
+                "Image": Film.Image,
+                "URL": Film.URL,
+            })
+        else:
+            return jsonify({'msg': 'Film not found'}), 404
     else:
         return jsonify('Error'), 500
 
 
 ##########
+# Serials
+##########
+
+@api_blueprint.route('/serials/get')
+@api_blueprint.route('/serials/get/<nr>')
+def get_serials(nr=1):
+    Table = []
+    Serials = models.Serial.query.filter(models.Serial.ID.between((int(nr) - 1) * 10, int(nr) * 10 - 1))
+    for Data in Serials:
+        Table.append({
+            "ID": Data.ID,
+            "Title": Data.Title,
+            "Year": Data.Year,
+            "Duration": Data.Duration,
+            "Director": Data.Director,
+            "Country": Data.Country,
+            "Genre": Data.Genre,
+            "Rating": Data.Rating,
+            "Description": Data.Description,
+            "Image": Data.Image,
+            "URL": Data.URL,
+        })
+    print("Zakres od " + str((int(nr) - 1) * 10) + " do " + str(int(nr) * 10 - 1))
+    return jsonify(Table), 200
+
+@api_blueprint.route('/serial/get/<nr>')
+def get_serial(nr=False):
+    if nr:
+        print("[GET] Serial - " + str(nr))
+        Serial = models.Serial.query.filter_by(ID=nr).first()
+        return jsonify({
+            "ID": Serial.ID,
+            "Title": Serial.Title,
+            "Year": Serial.Year,
+            "Duration": Serial.Duration,
+            "Director": Serial.Director,
+            "Country": Serial.Country,
+            "Genre": Serial.Genre,
+            "Rating": Serial.Rating,
+            "Description": Serial.Description,
+            "Image": Serial.Image,
+            "URL": Serial.URL,
+        })
+    else:
+        return jsonify('Error'), 500
+
+##########
 # Comments
 ##########
 
-@api_blueprint.route('/comments/get/<nr>')
-def get_film_comments(nr=False):
-    if nr:
+@api_blueprint.route('/comments/get/<type>/<nr>')
+def get_film_comments(type=False, nr=False):
+    if nr and type:
         print("[GET] Comments - " + str(nr))
-        Comments = models.Comment.query.filter_by(Film_ID=nr)
+        if type == "film":
+            Comments = models.Comment.query.filter_by(Film_ID=nr)
+        elif type == "serial":
+            Comments = models.Comment.query.filter_by(Serial_ID=nr)
         Table = []
         for Comment in Comments:
             Table.append({
@@ -131,29 +184,48 @@ def add_film_comments(nr=False):
 # Rating
 ##########
 
-@api_blueprint.route('/rating/get/<nr>')
+@api_blueprint.route('/rating/get/<type>/<nr>')
 @jwt_required()
-def get_film_rating(nr=False):
+def get_film_rating(type=False, nr=False):
     current_user = get_jwt_identity()
-    if nr and current_user:
-        print("[GET] Rating - " + str(nr))
-        Rating = models.Rating.query.filter_by(Film_ID=nr, User_ID=models.User.query.filter_by(
-            Username=current_user).first().ID).first()
-        if Rating:
-            return jsonify({
-                "ID": Rating.ID,
-                "Film_ID": Rating.Film_ID,
-                "User_ID": Rating.User_ID,
-                "Rating": Rating.Rate,
-            }), 200
-        else:
-            return jsonify({
-                "ID": None,
-                "Film_ID": None,
-                "User_ID": None,
-                "Rating": 0,
-            }), 200
+    if nr and type and current_user:
+
+        print("[GET] Rating " + type + " - " + str(nr))
+        if type == "film":
+            Rating = models.Rating.query.filter_by(Film_ID=nr, User_ID=models.User.query.filter_by(Username=current_user).first().ID).first()
+            if Rating:
+                return jsonify({
+                    "ID": Rating.ID,
+                    "Film_ID": Rating.Film_ID,
+                    "User_ID": Rating.User_ID,
+                    "Rating": Rating.Rate,
+                }), 200
+            else:
+                return jsonify({
+                    "ID": None,
+                    "Serial_ID": None,
+                    "User_ID": None,
+                    "Rating": 0,
+                }), 200
+        if type == "serial":
+            Rating = models.Rating.query.filter_by(Serial_ID=nr, User_ID=models.User.query.filter_by(Username=current_user).first().ID).first()
+            if Rating:
+                return jsonify({
+                    "ID": Rating.ID,
+                    "Serial_ID": Rating.Serial_ID,
+                    "User_ID": Rating.User_ID,
+                    "Rating": Rating.Rate,
+                }), 200
+            else:
+                return jsonify({
+                    "ID": None,
+                    "Serial_ID": None,
+                    "User_ID": None,
+                    "Rating": 0,
+                }), 200
+        return jsonify('Error'), 500
     else:
+        print("[GET] Rating - Error")
         return jsonify('Error'), 500
 
 
@@ -167,12 +239,22 @@ def get_all_film_rating():
             Username=current_user).first().ID)
         Table = []
         for Rating in Ratings:
-            Table.append({
-                "ID": Rating.ID,
-                "Film_ID": Rating.Film_ID,
-                "Film_Name": models.Film.query.filter_by(ID=Rating.Film_ID).first().Title,
-                "Rating": Rating.Rate,
-            })
+            if Rating.Film_ID:
+                Table.append({
+                    "ID": Rating.ID,
+                    "Type": "film",
+                    "DataID": Rating.Film_ID,
+                    "DataName": models.Film.query.filter_by(ID=Rating.Film_ID).first().Title,
+                    "Rating": Rating.Rate,
+                })
+            if Rating.Serial_ID:
+                Table.append({
+                    "ID": Rating.ID,
+                    "Type": "serial",
+                    "DataID": Rating.Serial_ID,
+                    "DataName": models.Serial.query.filter_by(ID=Rating.Serial_ID).first().Title,
+                    "Rating": Rating.Rate,
+                })
         return jsonify(Table), 200
     else:
         return jsonify('Error'), 500
