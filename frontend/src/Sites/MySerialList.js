@@ -18,6 +18,7 @@ export default function MySerialList() {
     const [serials, setSerials] = useState([]);
     const {isLoading, isError} = useQuery(['Serials'], fetchSerials, {
         keepPreviousData: true,
+        refetchOnWindowFocus: false,
         onSuccess: (data) => {
             setSerials(oldSerials => [...oldSerials, ...data]);
         }

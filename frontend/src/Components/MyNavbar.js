@@ -1,12 +1,12 @@
 // Imports
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {Button, Container, Dropdown, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
 import ThemeContext from "../Context/ThemeContext";
 import { useTranslation } from 'react-i18next';
 
 // CSS
-import '../Styles/Navbar.css';
+import '../Styles/MyNavbar.css';
 
 // Code
 function MyNavBar (props) {
@@ -18,7 +18,6 @@ function MyNavBar (props) {
     ]
 
     const {theme, setTheme} = useContext(ThemeContext);
-    const {language, setLanguage} = useState("pl");
 
 	const changeTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
@@ -33,10 +32,6 @@ function MyNavBar (props) {
                     <Navbar.Toggle type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" />
                     <Navbar.Collapse id="navbarSupportedContent">
                         <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
-                            <NavDropdown title={t("trendy")} id="navbarScrollingDropdown">
-                                <NavDropdown.Item disabled="True">Top 100 - {t("filmy")}</NavDropdown.Item>
-                                <NavDropdown.Item disabled="True">Top 100 - {t("seriale")}</NavDropdown.Item>
-                            </NavDropdown>
                             <LinkContainer to="/Films">
                                 <Nav.Link>{t("filmy")}</Nav.Link>
                             </LinkContainer>

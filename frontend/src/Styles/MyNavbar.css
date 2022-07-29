@@ -16,3 +16,6 @@
     color: var(--my-accent-primary) !important;
 }
 
+#dropdown-basic {
+    color: var(--bs-nav-link-color);
+}

@@ -128,7 +128,7 @@ export default function MyFilm(props) {
 	if (dataComments.error) return toast.error(dataComments.error);
 
 	return (
-		<Container id="MyFilm" className="p-3 m-0 ustify-content-center">
+		<Container id="MyFilm" className="p-3 m-0 justify-content-center row">
 			<Col xl="9" id="MyFilm_Header" className="p-3 m-0">
 				<Container className="MyFilm_Title text-center">{dataFilm.data.Title}</Container>
 			</Col>

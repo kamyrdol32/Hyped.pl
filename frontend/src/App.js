@@ -10,18 +10,19 @@ import 'react-toastify/dist/ReactToastify.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // Components
-import MyNavBar from "./Components/Navbar";
+import MyNavBar from "./Components/MyNavbar";
 import MyHome from "./Sites/MyHome";
 import MyFilmList from "./Sites/MyFilmList";
 import MyFilm from "./Sites/MyFilm";
 import MyLogin from "./Sites/MyLogin";
 import MyRegister from "./Sites/MyRegister";
 import MyProfile from "./Sites/MyProfile";
+import MySerialList from "./Sites/MySerialList";
+import MySerial from "./Sites/MySerial";
+import MyFooter from "./Components/MyFooter";
 
 // CSS
 import './Styles/App.css';
-import MySerialList from "./Sites/MySerialList";
-import MySerial from "./Sites/MySerial";
 
 
 // Code
@@ -59,6 +60,7 @@ export default function App() {
 							<Route path="/profile" element={<MyProfile token={token} setToken={setToken} removeToken={removeToken} />} />
 						</Routes>
 					</Container>
+					<MyFooter />
 					<ToastContainer
 						position="bottom-right"
 						autoClose={5000}

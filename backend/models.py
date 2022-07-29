@@ -138,3 +138,29 @@ class Rating(db.Model):
 
     def __str__(self):
         return self.Rate
+
+
+class Newses(db.Model):
+    __tablename__ = 'Newses'
+    ID = db.Column(db.Integer, primary_key=True)
+    Title = db.Column(db.String(128), nullable=True)
+    Description = db.Column(db.String(1000), nullable=True)
+    Text = db.Column(db.String(100000), nullable=True)
+    Image = db.Column(db.String(1000), nullable=True)
+    URL = db.Column(db.String(1000), nullable=True)
+    Date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
+
+    def __init__(self, Title, Description, Text, Image, URL):
+        self.Title = Title
+        self.Description = Description
+        self.Text = Text
+        self.Image = Image
+        self.URL = URL
+        print('[Models] News created -', self.Title)
+
+    def __repr__(self):
+        return '<News %r>' % self.Title
+
+    def __str__(self):
+        return self.Title
+

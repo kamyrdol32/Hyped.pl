@@ -314,4 +314,23 @@ def add_film_rating(nr=False):
     except Exception as error:
         return jsonify({'error': str(error)}), 500
 
+##########
+# Newses
+##########
 
+@api_blueprint.route('/news/get')
+def get_all_news():
+    print("[GET] All news")
+    Newses = models.Newses.query.all()
+    Table = []
+    for News in Newses:
+        Table.append({
+            "ID": News.ID,
+            "Title": News.Title,
+            "Description": News.Description,
+            "Text": News.Text,
+            "Image": News.Image,
+            "URL": News.URL,
+            "Date": News.Date,
+        })
+    return jsonify(Table), 200

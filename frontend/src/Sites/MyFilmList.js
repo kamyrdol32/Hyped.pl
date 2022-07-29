@@ -18,6 +18,7 @@ export default function MyFilmList() {
     const [films, setFilms] = useState([]);
     const {isLoading, isError} = useQuery(['Films'], fetchFilms, {
         keepPreviousData: true,
+        refetchOnWindowFocus: false,
         onSuccess: (data) => {
             setFilms(oldFilms => [...oldFilms, ...data]);
         }

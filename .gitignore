@@ -4,4 +4,4 @@
 
 # React
 /frontend/node_modules/
-!/backend/config.py
+/backend/config.py
