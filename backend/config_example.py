@@ -14,7 +14,6 @@ JSON_SORT_KEYS = False
 
 # JWT
 JWT_SECRET_KEY = ''
-JWT_TOKEN_LOCATION = 'cookies'
 JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=30)
 
 

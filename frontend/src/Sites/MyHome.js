@@ -1,6 +1,6 @@
 // Imports
 import React, {useState} from 'react';
-import {Carousel, Container, Row} from "react-bootstrap";
+import {Carousel, Container} from "react-bootstrap";
 import {useQuery} from "@tanstack/react-query";
 import MyLoader from "../Components/MyLoader";
 import {toast} from "react-toastify";
@@ -31,7 +31,7 @@ export default function MyHome() {
 	if (isError) return toast.error(error);
 
 	return(
-		<Container className="justify-content-center p-3 row">
+		<Container className="justify-content-center p-5 row">
 			<Container className="col-9">
 
 				<Carousel fade className="p-3" activeIndex={index} interval={null} onSelect={handleSelect}>
@@ -57,7 +57,6 @@ export default function MyHome() {
 					</Container>
 				</Container>
 			</Container>
-
 		</Container>
 	);
 }

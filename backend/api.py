@@ -153,6 +153,8 @@ def add_film_comments(nr=False):
             comment = request.json.get('comment', None)
             type = request.json.get('type', None)
 
+            print(type)
+
             if type == "film":
                 Comment = models.Comment(
                     User_ID=models.User.query.filter_by(Username=current_user).first().ID,

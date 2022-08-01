@@ -23,6 +23,7 @@ import MyFooter from "./Components/MyFooter";
 
 // CSS
 import './Styles/App.css';
+import MyAccountActivate from "./Sites/MyAccountActivate";
 
 
 // Code
@@ -46,7 +47,7 @@ export default function App() {
 			<ThemeContext.Provider value={{theme, setTheme}}>
 				<BrowserRouter>
 					<MyNavBar token={token}/>
-					<Container>
+					<Container id="MyBody">
 						<Routes>
 							<Route path="/" element={<MyHome />} />
 							<Route path="/films" element={<MyFilmList />} />
@@ -57,7 +58,8 @@ export default function App() {
 
 							<Route path="/login" element={<MyLogin setToken={setToken} />} />
 							<Route path="/register" element={<MyRegister />} />
-							<Route path="/profile" element={<MyProfile token={token} setToken={setToken} removeToken={removeToken} />} />
+							<Route path="/account/activate/:KEY" element={<MyAccountActivate token={token} />} />
+							<Route path="/account" element={<MyProfile token={token} setToken={setToken} removeToken={removeToken} />} />
 						</Routes>
 					</Container>
 					<MyFooter />

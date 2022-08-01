@@ -8,13 +8,15 @@ class User(db.Model):
     Username = db.Column(db.String(80), unique=True, nullable=False)
     Email = db.Column(db.String(120), unique=True, nullable=False)
     Password = db.Column(db.String(120), nullable=False)
+    Secret_Key = db.Column(db.String(10), nullable=False)
     Is_Active = db.Column(db.Boolean, default=False)
     Is_Admin = db.Column(db.Boolean, default=False)
 
-    def __init__(self, Username, Email, Password, Is_Active=False, Is_Admin=False):
+    def __init__(self, Username, Email, Password, Secret_Key, Is_Active=False, Is_Admin=False):
         self.Username = Username
         self.Email = Email
         self.Password = Password
+        self.Secret_Key = Secret_Key
         self.Is_Active = Is_Active
         self.Is_Admin = Is_Admin
 

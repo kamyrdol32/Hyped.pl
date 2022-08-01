@@ -3,12 +3,13 @@ import json
 from flask import Flask, render_template
 from flask_jwt_extended import JWTManager, get_jwt, create_access_token, get_jwt_identity
 from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail, Message
 from datetime import datetime, timezone, timedelta
+
 
 import models
 import api
 import authorization
-
 import scraper
 
 app = Flask(__name__)
@@ -19,6 +20,7 @@ app.register_blueprint(scraper.scraper_blueprint, url_prefix='/scraper')
 
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
+mail = Mail(app)
 
 
 @app.errorhandler(404)

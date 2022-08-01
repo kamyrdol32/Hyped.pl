@@ -33,10 +33,13 @@ body {
     width: 100vw;
     height: 12vh;
     right: -50vw;
-    top: 0vh;
+    top: 0;
     background: var(--my-accent-primary);
     transform: rotate(45deg);
     box-shadow: rgb(0 0 0 / 50%) 0 0 7px 0;
     border: 2px solid var(--my-accent-secondary);
 }
 
+#MyBody {
+    min-height: calc(100vh - 58px - 132px);
+}

@@ -1,6 +1,6 @@
 // Imports
 import React, {useContext} from 'react';
-import {Button, Container, Dropdown, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Button, Container, Dropdown, Form, FormControl, Nav, Navbar} from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
 import ThemeContext from "../Context/ThemeContext";
 import { useTranslation } from 'react-i18next';
@@ -51,7 +51,7 @@ function MyNavBar (props) {
                             </Nav>
                             :(
                             <Nav>
-                                <LinkContainer to="/profile">
+                                <LinkContainer to="/account">
                                     <Nav.Link className="ps-4">{t("profil")}</Nav.Link>
                                 </LinkContainer>
                             </Nav>
