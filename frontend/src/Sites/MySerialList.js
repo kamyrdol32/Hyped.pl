@@ -49,8 +49,8 @@ export default function MySerialList() {
     return (
         <Container>
             <Row>
-                {serials.map(film => (
-                    <MyCardList key={film.ID} Type="Serial" ID={film.ID} Image={film.Image} Title={film.Title} Rating={film.Rating} Description={film.Description} Year={film.Year} Director={film.Director} Country={film.Country} Genre={film.Genre} />
+                {serials.map(serial => (
+                    <MyCardList key={serial.ID} Type="Serial" ID={serial.ID} Image={serial.Image} Title={serial.Title} Original_Title={serial.Original_Title} Rating={serial.Rating} Description={serial.Description} Year={serial.Year} Director={serial.Director} Country={serial.Country} Genre={serial.Genre} />
                 ))}
             </Row>
         </Container>

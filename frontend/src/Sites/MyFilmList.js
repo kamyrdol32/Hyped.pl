@@ -50,7 +50,7 @@ export default function MyFilmList() {
         <Container>
             <Row>
                 {films.map(film => (
-                    <MyCardList key={film.ID} Type="Film" ID={film.ID} Image={film.Image} Title={film.Title} Rating={film.Rating} Description={film.Description} Year={film.Year} Director={film.Director} Country={film.Country} Genre={film.Genre} />
+                    <MyCardList key={film.ID} Type="Film" ID={film.ID} Image={film.Image} Title={film.Title} Original_Title={film.Original_Title} Rating={film.Rating} Description={film.Description} Year={film.Year} Director={film.Director} Country={film.Country} Genre={film.Genre} />
                 ))}
             </Row>
         </Container>

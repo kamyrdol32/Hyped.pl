@@ -26,6 +26,7 @@ def get_films(nr=1):
         Table.append({
             "ID": Data.ID,
             "Title": Data.Title,
+            "Original_Title": Data.Original_Title,
             "Year": Data.Year,
             "Duration": Data.Duration,
             "Director": Data.Director,
@@ -49,6 +50,7 @@ def get_film(nr=False):
             return jsonify({
                 "ID": Film.ID,
                 "Title": Film.Title,
+                "Original_Title": Film.Original_Title,
                 "Year": Film.Year,
                 "Duration": Film.Duration,
                 "Director": Film.Director,
@@ -78,6 +80,7 @@ def get_serials(nr=1):
         Table.append({
             "ID": Data.ID,
             "Title": Data.Title,
+            "Original_Title": Data.Original_Title,
             "Year": Data.Year,
             "Duration": Data.Duration,
             "Director": Data.Director,
@@ -99,6 +102,7 @@ def get_serial(nr=False):
         return jsonify({
             "ID": Serial.ID,
             "Title": Serial.Title,
+            "Original_Title": Serial.Original_Title,
             "Year": Serial.Year,
             "Duration": Serial.Duration,
             "Director": Serial.Director,

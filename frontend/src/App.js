@@ -26,6 +26,7 @@ import './Styles/App.css';
 import MyAccountActivate from "./Sites/MyAccountActivate";
 import MyForgetPassword from "./Sites/MyForgetPassword";
 import MyChangePassword from "./Sites/MyChangePassword";
+import {MyComponent} from "./Components/template";
 
 
 // Code
@@ -34,7 +35,7 @@ const queryClient = new QueryClient()
 export default function App() {
 
 	// JWT
-	const { token, removeToken, setToken } = useToken();
+	const { token, setToken } = useToken();
 
 	// Dark mode
 	const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -64,6 +65,8 @@ export default function App() {
 							<Route path="/account" element={<MyProfile token={token} setToken={setToken} />} />
 							<Route path="/forgot" element={<MyForgetPassword />} />
 							<Route path="/change_password" element={<MyChangePassword token={token} setToken={setToken} />} />
+
+							{/*<Route path="/test" element={<MyComponent />} />*/}
 						</Routes>
 					</Container>
 					<MyFooter />

@@ -1,7 +1,7 @@
 // Imports
 import React, {useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {Col, Container, Image, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import { Rating } from "react-simple-star-rating";
@@ -13,6 +13,7 @@ import MyComments from "../Components/MyComments";
 
 // CSS
 import '../Styles/MySerial.css';
+import MyCard from "../Components/MyCard";
 
 // Code
 export default function MySerial(props) {
@@ -129,19 +130,8 @@ export default function MySerial(props) {
 
 	return (
 		<Container id="MyFilm" className="p-3 m-0 justify-content-center row">
-			<Col xl="9" id="MyFilm_Header" className="p-3 m-0">
-				<Container className="MyFilm_Title text-center">{dataSerial.data.Title}</Container>
-			</Col>
-			<Col xl="9" id="MyFilm_Body" className="p-3 m-0 row">
-				<Col lg="4" className="MyFilm_Image p-3 text-center"><Image src={dataSerial.data.Image} alt={dataSerial.data.Title}/></Col>
-				<Col lg="8" className="MyFilm_Description p-3">
-					<div className="text-center">{dataSerial.data.Description}</div><br/>
-					<span className="fw-bold">{t("premiera")}:</span> {dataSerial.data.Year}<br/>
-					<span className="fw-bold">{t("gatunek")}:</span> {dataSerial.data.Genre}<br/>
-					<span className="fw-bold">{t("czas_trwania")}:</span> {dataSerial.data.Duration} min<br/>
-					<span className="fw-bold">Filmweb:</span> <a href={"https://www.filmweb.pl" + dataSerial.data.URL}>Link</a><br/>
-				</Col>
-			</Col>
+
+			<MyCard key={dataSerial.data.ID} Type="Film" ID={dataSerial.data.ID} Image={dataSerial.data.Image} Title={dataSerial.data.Title} Original_Title={dataSerial.data.Original_Title} Duration={dataSerial.data.Duration} Rating={dataSerial.data.Rating} Description={dataSerial.data.Description} Year={dataSerial.data.Year} Director={dataSerial.data.Director} Country={dataSerial.data.Country} Genre={dataSerial.data.Genre} />
 
 
 			<Col xl="9" id="MyFilm_Rate" className="p-3 m-3">

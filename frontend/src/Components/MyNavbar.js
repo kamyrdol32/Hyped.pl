@@ -1,5 +1,5 @@
 // Imports
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Button, Container, Dropdown, Form, FormControl, Nav, Navbar} from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
 import ThemeContext from "../Context/ThemeContext";
@@ -18,6 +18,14 @@ function MyNavBar (props) {
     ]
 
     const {theme, setTheme} = useContext(ThemeContext);
+    const [search, setSearch] = useState('');
+
+    const handleSearch = (event) => {
+        let value = event.target.value;
+        if (value.length >= 3) {
+            setSearch(value);
+        }
+    }
 
 	const changeTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
@@ -40,8 +48,9 @@ function MyNavBar (props) {
                             </LinkContainer>
                         </Nav>
                         <Form className="d-flex">
-                            <FormControl type="search" placeholder={t("fraza")} className="me-2" aria-label="Search" />
+                            <FormControl type="search" placeholder={t("fraza")} className="me-2" aria-label="Search" onChange={handleSearch} />
                             <Button variant="outline-warning">{t("wyszukaj")}</Button>
+                            {search}
                         </Form>
                         {!props.token && props.token !== "" && props.token !== "undefined"?
                             <Nav>

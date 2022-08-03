@@ -1,7 +1,7 @@
 // Imports
 import React, {useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {Col, Container, Image, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 import { Rating } from "react-simple-star-rating";
@@ -13,6 +13,7 @@ import MyComments from "../Components/MyComments";
 
 // CSS
 import '../Styles/MyFilm.css';
+import MyCard from "../Components/MyCard";
 
 // Code
 export default function MyFilm(props) {
@@ -129,20 +130,8 @@ export default function MyFilm(props) {
 
 	return (
 		<Container id="MyFilm" className="p-3 m-0 justify-content-center row">
-			<Col xl="9" id="MyFilm_Header" className="p-3 m-0">
-				<Container className="MyFilm_Title text-center">{dataFilm.data.Title}</Container>
-			</Col>
-			<Col xl="9" id="MyFilm_Body" className="p-3 m-0 row">
-				<Col lg="4" className="MyFilm_Image p-3 text-center"><Image src={dataFilm.data.Image} alt={dataFilm.data.Title}/></Col>
-				<Col lg="8" className="MyFilm_Description p-3">
-					<div className="text-center">{dataFilm.data.Description}</div><br/>
-					<span className="fw-bold">{t("premiera")}:</span> {dataFilm.data.Year}<br/>
-					<span className="fw-bold">{t("rezyseria")}:</span> {dataFilm.data.Director}<br/>
-					<span className="fw-bold">{t("gatunek")}:</span> {dataFilm.data.Genre}<br/>
-					<span className="fw-bold">{t("czas_trwania")}:</span> {dataFilm.data.Duration} min<br/>
-					<span className="fw-bold">Filmweb:</span> <a href={"https://www.filmweb.pl" + dataFilm.data.URL}>Link</a><br/>
-				</Col>
-			</Col>
+
+			<MyCard key={dataFilm.data.ID} Type="Film" ID={dataFilm.data.ID} Image={dataFilm.data.Image} Title={dataFilm.data.Title} Original_Title={dataFilm.data.Original_Title} Duration={dataFilm.data.Duration} Rating={dataFilm.data.Rating} Description={dataFilm.data.Description} Year={dataFilm.data.Year} Director={dataFilm.data.Director} Country={dataFilm.data.Country} Genre={dataFilm.data.Genre} />
 
 
 			<Col xl="9" id="MyFilm_Rate" className="p-3 m-3">

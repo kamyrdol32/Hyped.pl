@@ -84,6 +84,9 @@ def login():
 
         user = models.User.query.filter_by(Username=username).first()
 
+        if not user:
+            return jsonify({"error": "Wrong username or password"}), 400
+        
         # Szyfrowanie
         login_password = hashlib.md5(password.encode('utf-8')).hexdigest()
         login_password = hashlib.md5((login_password + user.Secret_Key).encode('utf-8')).hexdigest()

@@ -33,6 +33,7 @@ class Film(db.Model):
     __tablename__ = 'Films'
     ID = db.Column(db.Integer, primary_key=True)
     Title = db.Column(db.String(128), nullable=True)
+    Original_Title = db.Column(db.String(128), nullable=True)
     Year = db.Column(db.Integer, nullable=True)
     Duration = db.Column(db.Integer, nullable=True)
     Director = db.Column(db.String(128), nullable=True)
@@ -43,8 +44,9 @@ class Film(db.Model):
     Image = db.Column(db.String(1000), nullable=True)
     URL = db.Column(db.String(1000), nullable=True)
 
-    def __init__(self, Title, Year, Duration, Director, Country, Genre, Rating, Description, Image, URL):
+    def __init__(self, Title, Original_Title, Year, Duration, Director, Country, Genre, Rating, Description, Image, URL):
         self.Title = Title
+        self.Original_Title = Original_Title
         self.Year = Year
         self.Duration = Duration
         self.Director = Director
@@ -67,6 +69,7 @@ class Serial(db.Model):
     __tablename__ = 'Serials'
     ID = db.Column(db.Integer, primary_key=True)
     Title = db.Column(db.String(80), nullable=True)
+    Original_Title = db.Column(db.String(128), nullable=True)
     Year = db.Column(db.Integer, nullable=True)
     Duration = db.Column(db.Integer, nullable=True)
     Director = db.Column(db.String(80), nullable=True)
@@ -77,8 +80,9 @@ class Serial(db.Model):
     Image = db.Column(db.String(1000), nullable=True)
     URL = db.Column(db.String(1000), nullable=True)
 
-    def __init__(self, Title, Year, Duration, Director, Country, Genre, Rating, Description, Image, URL):
+    def __init__(self, Title, Original_Title, Year, Duration, Director, Country, Genre, Rating, Description, Image, URL):
         self.Title = Title
+        self.Original_Title = Original_Title
         self.Year = Year
         self.Duration = Duration
         self.Director = Director
@@ -165,4 +169,3 @@ class Newses(db.Model):
 
     def __str__(self):
         return self.Title
-

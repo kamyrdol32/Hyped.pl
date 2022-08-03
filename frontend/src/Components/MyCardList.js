@@ -12,7 +12,8 @@ import '../Styles/MyCardList.css';
 // Code
 export default function MyCardList(props) {
 
-	const {t} = useTranslation();
+	const {t, i18n} = useTranslation();
+	const language = i18n.language;
 
 	return (
 		<Row className="justify-content-center p-3">
@@ -26,7 +27,11 @@ export default function MyCardList(props) {
 						<Card.Title>
 		 					<Row className="p-3">
 		 						<Col lg="1" className="MyCard_NR text-center">{props.ID}</Col>
-		 						<Col lg="9" className="MyCard_Title">{props.Title}</Col>
+							    {language === 'pl' ?
+		 						    <Col lg="9" className="MyCard_Title">{props.Title}</Col>
+								:
+									<Col lg="9" className="MyCard_Title">{props.Original_Title}</Col>
+								}
 		 						<Col lg="2" className="MyCard_Rating">{props.Rating} <span>&#9733;</span></Col>
 		 					</Row>
 						</Card.Title>
