@@ -76,6 +76,10 @@ export default function MyProfile(props) {
 		}
 	}
 
+	function navigateToChangePassword() {
+		navigate('/change_password');
+	}
+
 	if (dataProfile.isLoading || dataRating.isLoading || !isLogged) return <MyLoader />
 	if (dataProfile.error) return toast.error(dataProfile.error);
 	if (dataRating.error) return toast.error(dataRating.error);
@@ -86,8 +90,11 @@ export default function MyProfile(props) {
 			<Col md="9" id="MyProfile" className="p-3 m-3">
 				<h1 className="MyProfile_Logo text-center"><span className="MyProfile_Logo fa fa-user-circle"/></h1>
 				<h3 className="MyProfile_Header text-center">{t("moj_profil")}</h3>
-				<Container className="MyProfile_Logout text-center p-3">
+				<Container className="MyProfile_Logout text-center p-2">
 					<Button onClick={fetchLogout}>{t("wyloguj")}</Button>
+				</Container>
+				<Container className="MyProfile_Logout text-center p-2">
+					<Button onClick={navigateToChangePassword}>{t("zmien_haslo")}</Button>
 				</Container>
 				<Container className="m-4">
 					<div className="MyProfile_Info p-3">

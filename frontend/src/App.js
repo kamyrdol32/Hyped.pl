@@ -24,6 +24,8 @@ import MyFooter from "./Components/MyFooter";
 // CSS
 import './Styles/App.css';
 import MyAccountActivate from "./Sites/MyAccountActivate";
+import MyForgetPassword from "./Sites/MyForgetPassword";
+import MyChangePassword from "./Sites/MyChangePassword";
 
 
 // Code
@@ -59,7 +61,9 @@ export default function App() {
 							<Route path="/login" element={<MyLogin setToken={setToken} />} />
 							<Route path="/register" element={<MyRegister />} />
 							<Route path="/account/activate/:KEY" element={<MyAccountActivate token={token} />} />
-							<Route path="/account" element={<MyProfile token={token} setToken={setToken} removeToken={removeToken} />} />
+							<Route path="/account" element={<MyProfile token={token} setToken={setToken} />} />
+							<Route path="/forgot" element={<MyForgetPassword />} />
+							<Route path="/change_password" element={<MyChangePassword token={token} setToken={setToken} />} />
 						</Routes>
 					</Container>
 					<MyFooter />
