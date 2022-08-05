@@ -116,6 +116,62 @@ def get_serial(nr=False):
     else:
         return jsonify('Error'), 500
 
+@api_blueprint.route('/search/<name>')
+def search(name):
+    if name:
+        try:
+            Films = models.Film.query.filter(models.Film.Title.like('%' + name + '%')).all()
+            Serials = models.Serial.query.filter(models.Serial.Title.like('%' + name + '%')).all()
+
+            Table = []
+
+
+            if Films:
+                for Data in Films:
+                    Table.append({
+                        "Type": "Film",
+                        "ID": Data.ID,
+                        "Title": Data.Title,
+                        "Original_Title": Data.Original_Title,
+                        "Year": Data.Year,
+                        "Duration": Data.Duration,
+                        "Director": Data.Director,
+                        "Country": Data.Country,
+                        "Genre": Data.Genre,
+                        "Rating": Data.Rating,
+                        "Description": Data.Description,
+                        "Image": Data.Image,
+                        "URL": Data.URL,
+                    })
+
+            if Serials:
+                for Data in Serials:
+                    Table.append({
+                        "Type": "Serial",
+                        "ID": Data.ID,
+                        "Title": Data.Title,
+                        "Original_Title": Data.Original_Title,
+                        "Year": Data.Year,
+                        "Duration": Data.Duration,
+                        "Director": Data.Director,
+                        "Country": Data.Country,
+                        "Genre": Data.Genre,
+                        "Rating": Data.Rating,
+                        "Description": Data.Description,
+                        "Image": Data.Image,
+                        "URL": Data.URL,
+                    })
+
+
+                print("Znaleziono: " + str(len(Table)))
+
+            return jsonify(sorted(Table, key=lambda k: k['ID']))
+
+        except Exception as error:
+            return jsonify({'error': error}), 500
+    else:
+        return jsonify('Name error'), 500
+
 ##########
 # Comments
 ##########

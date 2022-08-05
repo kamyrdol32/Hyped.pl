@@ -2,7 +2,6 @@
 import React, {useState} from 'react';
 import {Container, Form} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
-import {toast} from "react-toastify";
 
 // CSS
 import '../Styles/MyRegister.css';

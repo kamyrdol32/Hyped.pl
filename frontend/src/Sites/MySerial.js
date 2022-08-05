@@ -131,7 +131,7 @@ export default function MySerial(props) {
 	return (
 		<Container id="MyFilm" className="p-3 m-0 justify-content-center row">
 
-			<MyCard key={dataSerial.data.ID} Type="Film" ID={dataSerial.data.ID} Image={dataSerial.data.Image} Title={dataSerial.data.Title} Original_Title={dataSerial.data.Original_Title} Duration={dataSerial.data.Duration} Rating={dataSerial.data.Rating} Description={dataSerial.data.Description} Year={dataSerial.data.Year} Director={dataSerial.data.Director} Country={dataSerial.data.Country} Genre={dataSerial.data.Genre} />
+			<MyCard key={dataSerial.data.ID} Type="Film" ID={dataSerial.data.ID} Image={dataSerial.data.Image} Title={dataSerial.data.Title} Original_Title={dataSerial.data.Original_Title} Duration={dataSerial.data.Duration} Rating={dataSerial.data.Rating} Description={dataSerial.data.Description} Year={dataSerial.data.Year} Director={dataSerial.data.Director} Country={dataSerial.data.Country} Genre={dataSerial.data.Genre} URL={dataSerial.data.URL} />
 
 
 			<Col xl="9" id="MyFilm_Rate" className="p-3 m-3">

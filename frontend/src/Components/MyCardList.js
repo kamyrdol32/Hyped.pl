@@ -36,7 +36,13 @@ export default function MyCardList(props) {
 		 					</Row>
 						</Card.Title>
 						<Container>
-							<span className="MyCard_Description">{props.Description}</span>
+							{language === 'pl' ?
+								<span className="MyCard_Description">{props.Description}</span>
+							:
+								<span className="MyCard_Description">
+									Donec fermentum elit et scelerisque vestibulum. Suspendisse at nulla sed mi pulvinar dignissim non et dolor. Curabitur erat erat, maximus nec ipsum nec, mattis dapibus erat. Praesent laoreet ipsum velit, at semper est scelerisque in. Aenean placerat eu nisl non convallis. Integer at elit ut sem lobortis ultricies. Sed non rutrum dolor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras ut tincidunt odio, ac viverra risus.
+								</span>
+							}
 
 							<ListGroup className="p-3">
 								<ListGroup.Item className="MyCard_ListGroup"><span className="fw-bold">{t("premiera")}: </span>{props.Year}</ListGroup.Item>

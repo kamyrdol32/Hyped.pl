@@ -4,12 +4,15 @@ import {Button, Container, Dropdown, Form, FormControl, Nav, Navbar} from "react
 import { LinkContainer } from 'react-router-bootstrap'
 import ThemeContext from "../Context/ThemeContext";
 import { useTranslation } from 'react-i18next';
+import {useNavigate} from "react-router-dom";
 
 // CSS
 import '../Styles/MyNavbar.css';
 
 // Code
 function MyNavBar (props) {
+
+    const navigate = useNavigate();
     const { t, i18n } = useTranslation();
     const languages = [
         {name: 'polski', value: 'pl'},
@@ -21,10 +24,20 @@ function MyNavBar (props) {
     const [search, setSearch] = useState('');
 
     const handleSearch = (event) => {
-        let value = event.target.value;
-        if (value.length >= 3) {
-            setSearch(value);
+        let value = event.target.value
+        value = value.replace(/\s+/g, '-').toLowerCase();
+        setSearch(value);
+    }
+
+    const handleKeyPress = (event) => {
+        console.log(event.key);
+        if (event.key === 'Enter') {
+            window.location.href = `/search/${search}`;
         }
+    }
+
+    function searchData() {
+        window.location.href = `/search/${search}`;
     }
 
 	const changeTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
@@ -48,9 +61,8 @@ function MyNavBar (props) {
                             </LinkContainer>
                         </Nav>
                         <Form className="d-flex">
-                            <FormControl type="search" placeholder={t("fraza")} className="me-2" aria-label="Search" onChange={handleSearch} />
-                            <Button variant="outline-warning">{t("wyszukaj")}</Button>
-                            {search}
+                            <FormControl type="search" placeholder={t("fraza")} className="MyNavbar_Input me-2" aria-label="Search" onChange={handleSearch} />
+                            <Button variant="outline-warning" onClick={searchData} onSubmit={setSearch} onKeyDown={handleKeyPress}>{t("wyszukaj")}</Button>
                         </Form>
                         {!props.token && props.token !== "" && props.token !== "undefined"?
                             <Nav>

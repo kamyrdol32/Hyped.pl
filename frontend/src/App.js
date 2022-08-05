@@ -26,7 +26,7 @@ import './Styles/App.css';
 import MyAccountActivate from "./Sites/MyAccountActivate";
 import MyForgetPassword from "./Sites/MyForgetPassword";
 import MyChangePassword from "./Sites/MyChangePassword";
-import {MyComponent} from "./Components/template";
+import MySearch from "./Sites/MySearch";
 
 
 // Code
@@ -58,6 +58,7 @@ export default function App() {
 
 							<Route path="/film/:ID" element={<MyFilm token={token} setToken={setToken} />} />
 							<Route path="/serial/:ID" element={<MySerial token={token} setToken={setToken} />} />
+							<Route path="/search/:NAME" element={<MySearch />} />
 
 							<Route path="/login" element={<MyLogin setToken={setToken} />} />
 							<Route path="/register" element={<MyRegister />} />

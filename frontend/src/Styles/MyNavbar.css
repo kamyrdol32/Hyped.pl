@@ -19,3 +19,14 @@
 #dropdown-basic {
     color: var(--bs-nav-link-color);
 }
+
+.MyNavbar_Input, .MyNavbar_Input:focus {
+    background-color: #373737;
+    border-color: var(--my-accent-primary);
+    box-shadow: none;
+    color: white;
+}
+
+.MyNavbar_Input::placeholder {
+    color: var(--my-accent-primary);
+}

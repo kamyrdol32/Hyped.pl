@@ -131,7 +131,7 @@ export default function MyFilm(props) {
 	return (
 		<Container id="MyFilm" className="p-3 m-0 justify-content-center row">
 
-			<MyCard key={dataFilm.data.ID} Type="Film" ID={dataFilm.data.ID} Image={dataFilm.data.Image} Title={dataFilm.data.Title} Original_Title={dataFilm.data.Original_Title} Duration={dataFilm.data.Duration} Rating={dataFilm.data.Rating} Description={dataFilm.data.Description} Year={dataFilm.data.Year} Director={dataFilm.data.Director} Country={dataFilm.data.Country} Genre={dataFilm.data.Genre} />
+			<MyCard key={dataFilm.data.ID} Type="Film" ID={dataFilm.data.ID} Image={dataFilm.data.Image} Title={dataFilm.data.Title} Original_Title={dataFilm.data.Original_Title} Duration={dataFilm.data.Duration} Rating={dataFilm.data.Rating} Description={dataFilm.data.Description} Year={dataFilm.data.Year} Director={dataFilm.data.Director} Country={dataFilm.data.Country} Genre={dataFilm.data.Genre} URL={dataFilm.data.URL} />
 
 
 			<Col xl="9" id="MyFilm_Rate" className="p-3 m-3">
