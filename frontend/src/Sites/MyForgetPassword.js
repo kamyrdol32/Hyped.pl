@@ -24,7 +24,7 @@ export default function MyForgetPassword() {
 		});
 		const data = await response.json();
 		if (response.status === 200) {
-			toast.success(t("email_resetowanie_hasla"));
+			toast.success(t("email_wyslany"));
 		} else {
 			toast.error(data.error);
 		}

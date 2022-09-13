@@ -9,8 +9,8 @@
 }
 
 :root {
-    --my-background-primary: #ededed;
-    --my-background-secondary: #c8c8c8;
+    --my-background-primary: #F0F2F5;
+    --my-background-secondary: #e5e5e5;
     --my-text-primary: #272727;
     --my-text-secondary: #000000;
     --my-accent-primary: #ECB72D;
@@ -20,7 +20,7 @@
 
 [data-theme="dark"] {
     --my-background-primary: #272727;
-    --my-background-secondary: #323232;
+    --my-background-secondary: #212529;
     --my-text-primary: #ededed;
     --my-text-secondary: #ffffff;
     --my-accent-primary: #ECB72D;

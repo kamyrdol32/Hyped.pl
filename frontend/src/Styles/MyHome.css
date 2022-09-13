@@ -1,7 +1,13 @@
-.MyHome_Container {
+#MyHome {
+    background-color: var(--my-background-secondary);
+    border-radius: 20px;
     border-top: var(--my-accent-primary) solid 2px;
     border-bottom: var(--my-accent-primary) solid 2px;
-    border-radius: 20px;
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.3);
+}
+
+#MyHome:hover {
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.5);
 }
 
 .MyHome_Title {

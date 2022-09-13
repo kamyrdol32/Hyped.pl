@@ -58,6 +58,8 @@ def register():
             send_welcome_email(username, email, key)
 
             return jsonify({'success': 'Prosze potwierdzic konto poprzez E-Mail', 'key': key})
+
+        # W przypadku błędu
         except Exception as error:
             core.db.session.rollback()
             core.app.logger.error(error)
@@ -74,8 +76,6 @@ def login():
 
         username = request.json.get('username', None)
         password = request.json.get('password', None)
-
-        print(username, password)
 
         if not username:
             return jsonify({"error": "Missing username parameter"}), 400

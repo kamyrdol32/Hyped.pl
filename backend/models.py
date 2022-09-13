@@ -12,6 +12,7 @@ class User(db.Model):
     Is_Active = db.Column(db.Boolean, default=False)
     Is_Admin = db.Column(db.Boolean, default=False)
 
+
     def __init__(self, Username, Email, Password, Secret_Key, Is_Active=False, Is_Admin=False):
         self.Username = Username
         self.Email = Email
@@ -19,11 +20,12 @@ class User(db.Model):
         self.Secret_Key = Secret_Key
         self.Is_Active = Is_Active
         self.Is_Admin = Is_Admin
-
         print("[Models] User created - " + str(self.Username))
+
 
     def __repr__(self):
         return '<User %r>' % self.Username
+
 
     def __str__(self):
         return self.Username
@@ -68,9 +70,9 @@ class Film(db.Model):
 class Serial(db.Model):
     __tablename__ = 'Serials'
     ID = db.Column(db.Integer, primary_key=True)
-    Title = db.Column(db.String(80), nullable=True)
+    Title = db.Column(db.String(128), nullable=True)
     Original_Title = db.Column(db.String(128), nullable=True)
-    Year = db.Column(db.Integer, nullable=True)
+    Year = db.Column(db.String(80), nullable=True)
     Duration = db.Column(db.Integer, nullable=True)
     Director = db.Column(db.String(80), nullable=True)
     Country = db.Column(db.String(80), nullable=True)
@@ -151,7 +153,7 @@ class Newses(db.Model):
     ID = db.Column(db.Integer, primary_key=True)
     Title = db.Column(db.String(128), nullable=True)
     Description = db.Column(db.String(1000), nullable=True)
-    Text = db.Column(db.String(100000), nullable=True)
+    Text = db.Column(db.String(10000), nullable=True)
     Image = db.Column(db.String(1000), nullable=True)
     URL = db.Column(db.String(1000), nullable=True)
     Date = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)

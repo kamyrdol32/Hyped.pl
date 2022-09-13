@@ -2,7 +2,7 @@
 import React from 'react';
 import {Container} from "react-bootstrap";
 import {useParams} from "react-router-dom";
-import {useQuery, useQueryClient} from "@tanstack/react-query";
+import {useQuery} from "@tanstack/react-query";
 import MyLoader from "../Components/MyLoader";
 import {toast} from "react-toastify";
 
@@ -13,7 +13,6 @@ import MyCardList from "../Components/MyCardList";
 export default function MySearch() {
 
 	const params = useParams()
-	const queryClient = useQueryClient()
 
 	const {data, isLoading, isError, error} = useQuery(['Search'], fetchSearchData);
 	async function fetchSearchData() {

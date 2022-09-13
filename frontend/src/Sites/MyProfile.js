@@ -111,9 +111,9 @@ export default function MyProfile(props) {
 			<Col md="9" id="MyProfile_Films" className="p-3 m-3">
 				<h3 className="MyProfile_Films_Header text-center p-5">{t("obejrzano")}</h3>
 				<div className="MyProfile_Films_List p-3">
-					{dataRating.data.map((rating) => (
+					{dataRating.data ? dataRating.data.map((rating) => (
 						<MyProfileRating key={rating.ID} Type={rating.Type} ID={rating.DataID} Title={rating.DataName} Rating={rating.Rating}/>
-					))}
+					)): null}
 				</div>
 			</Col>
 

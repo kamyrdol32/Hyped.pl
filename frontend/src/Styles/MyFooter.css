@@ -1,14 +1,15 @@
 #MyFooter {
-    background-color: var(--my-background-secondary);
+    background-color: #212529;
     position: relative;
     bottom: 0;
+    border-top: 2px solid var(--my-accent-primary);
 }
 
 .MyFooter_Icon {
     font-size: 1.5em;
     padding-left: 5vw;
     padding-right: 5vw;
-    color: var(--my-text-primary);
+    color: #9a9c9d;
 }
 
 .MyFooter_Icon:hover, .MyFooter_Icon:focus, .MyFooter_Icon:active {
@@ -17,5 +18,5 @@
 
 .MyFooter_Text {
     font-size: 1em;
-    color: var(--my-text-primary);
+    color: #9a9c9d;
 }

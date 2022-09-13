@@ -26,9 +26,7 @@ export default function MyAccountActivate() {
 		}
 		if (response.status === 200) {
 			toast.success(t("klucz_aktywowany"));
-			setInterval(() => {
-				navigate('/');
-			}, 5000);
+			navigate('/');
 		}
 		console.log(params.KEY);
 		return response.json();

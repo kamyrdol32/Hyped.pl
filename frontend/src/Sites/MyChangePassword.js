@@ -55,12 +55,11 @@ export default function MyChangePassword(props) {
 		}
 	}
 
-
 	return (
 		<Container id="MyChangePassword" className="p-5 justify-content-center">
 			<Container className="col-md-4 mb-5">
 				<h1 className="MyChangePassword_Logo text-center"><span className="fa fa-user-circle"></span></h1>
-				<h3 className="text-center">{t("zapomniane_haslo")}</h3>
+				<h3 className="text-center">{t("zmien_haslo")}</h3>
 			</Container>
 			<Container className="MyChangePassword_Body col-md-4 mb-5">
 				<Form.Group controlId="MyUsername" className="m-4 text-center">
@@ -84,9 +83,6 @@ export default function MyChangePassword(props) {
 						<Form.Control type="button" value={t("zatwierdz")} onClick={fetchChangePassword} />
 					</Form.Group>
 				</Container>
-			</Container>
-			<Container className="col-md-6 text-center">
-				{t("email_zmiana_hasla")}
 			</Container>
 		</Container>
 	)

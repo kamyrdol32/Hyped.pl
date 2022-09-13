@@ -48,11 +48,11 @@ export default function MySerialList() {
 
     return (
         <Container>
-            <Row>
+            {/*<Row>*/}
                 {serials.map(serial => (
                     <MyCardList key={serial.ID} Type="Serial" ID={serial.ID} Image={serial.Image} Title={serial.Title} Original_Title={serial.Original_Title} Rating={serial.Rating} Description={serial.Description} Year={serial.Year} Director={serial.Director} Country={serial.Country} Genre={serial.Genre} />
                 ))}
-            </Row>
+            {/*</Row>*/}
         </Container>
     )
 }

@@ -20,7 +20,9 @@ export default function MyCardList(props) {
 			<Row className="MyCard col-9 p-0">
 
 				<Col lg={4} className="p-0">
-					<Card.Img className="MyCard_Img" src={props.Image} alt={props.Title} />
+					<a href={"/"+ props.Type +"/" + props.ID}>
+						<Card.Img className="MyCard_Img" src={props.Image} alt={props.Title} />
+					</a>
 				</Col>
 				<Col lg={8}>
 					<Card.Body>
@@ -40,7 +42,7 @@ export default function MyCardList(props) {
 								<span className="MyCard_Description">{props.Description}</span>
 							:
 								<span className="MyCard_Description">
-									Donec fermentum elit et scelerisque vestibulum. Suspendisse at nulla sed mi pulvinar dignissim non et dolor. Curabitur erat erat, maximus nec ipsum nec, mattis dapibus erat. Praesent laoreet ipsum velit, at semper est scelerisque in. Aenean placerat eu nisl non convallis. Integer at elit ut sem lobortis ultricies. Sed non rutrum dolor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras ut tincidunt odio, ac viverra risus.
+									Donec fermentum elit et scelerisque vestibulum. Suspendisse at nulla sed mi pulvinar dignissim non et dolor. Curabitur erat erat, maximus nec ipsum nec, mattis dapibus erat. Praesent laoreet ipsum velit, at semper est scelerisque in. Aenean placerat eu nisl non convallis. Integer at elit ut sem lobortis ultricies.
 								</span>
 							}
 
@@ -50,7 +52,7 @@ export default function MyCardList(props) {
 								<ListGroup.Item className="MyCard_ListGroup"><span className="fw-bold">{t("produkcja")}: </span>{props.Country}</ListGroup.Item>
 								<ListGroup.Item className="MyCard_ListGroup"><span className="fw-bold">{t("gatunek")}: </span>{props.Genre}</ListGroup.Item>
 							</ListGroup>
-							<Container className="text-center">
+							<Container className="text-center pb-3">
 								<LinkContainer to={"/"+ props.Type +"/" + props.ID}>
 									<Card.Link className="MyCard_Link">{t("wiecej_informacji")}</Card.Link>
 								</LinkContainer>

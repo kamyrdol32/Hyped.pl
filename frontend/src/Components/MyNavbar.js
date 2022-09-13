@@ -4,7 +4,6 @@ import {Button, Container, Dropdown, Form, FormControl, Nav, Navbar} from "react
 import { LinkContainer } from 'react-router-bootstrap'
 import ThemeContext from "../Context/ThemeContext";
 import { useTranslation } from 'react-i18next';
-import {useNavigate} from "react-router-dom";
 
 // CSS
 import '../Styles/MyNavbar.css';
@@ -12,7 +11,6 @@ import '../Styles/MyNavbar.css';
 // Code
 function MyNavBar (props) {
 
-    const navigate = useNavigate();
     const { t, i18n } = useTranslation();
     const languages = [
         {name: 'polski', value: 'pl'},
@@ -25,7 +23,7 @@ function MyNavBar (props) {
 
     const handleSearch = (event) => {
         let value = event.target.value
-        value = value.replace(/\s+/g, '-').toLowerCase();
+        value = value.replace(/\s+/g, '_').toLowerCase();
         setSearch(value);
     }
 

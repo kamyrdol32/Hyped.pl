@@ -32,7 +32,7 @@ export default function MyHome() {
 
 	return(
 		<Container className="justify-content-center p-5 row">
-			<Container className="col-9">
+			<Container id="MyHome" className="col-12">
 
 				<Carousel fade className="p-3" activeIndex={index} interval={null} onSelect={handleSelect}>
 					{data.map((item, index) => (
@@ -43,8 +43,8 @@ export default function MyHome() {
 								alt={item.Title}
 							/>
 							<Carousel.Caption>
-								<h3>{item.Title}</h3>
-								<p>{item.Description}</p>
+								<h3 className="PhoneDispleyNone">{item.Title}</h3>
+								<p className="PhoneDispleyNone">{item.Description}</p>
 							</Carousel.Caption>
 						</Carousel.Item>
 					))}

@@ -13,16 +13,21 @@
 
 .MyCard:hover {
     border: 0;
-    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.5);
 }
+
+.MyCard {
+    border: 0;
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.3);
+}
+
 
 .MyCard_Title {
     font-weight: bolder;
 }
 
 .MyCard_Description {
-    font-size: 1rem;
-    font-weight: lighter;
+    font-size: 1.1rem;
     color: var(--my-text-primary);
 }
 
@@ -34,8 +39,6 @@
     color: var(--my-accent-primary);
     font-weight: bolder;
 }
-
-
 
 .MyCard_Link {
     text-decoration: none;

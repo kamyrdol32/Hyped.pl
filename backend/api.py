@@ -120,11 +120,13 @@ def get_serial(nr=False):
 def search(name):
     if name:
         try:
+
+            name = name.replace('_', ' ')
+
             Films = models.Film.query.filter(models.Film.Title.like('%' + name + '%')).all()
             Serials = models.Serial.query.filter(models.Serial.Title.like('%' + name + '%')).all()
 
             Table = []
-
 
             if Films:
                 for Data in Films:

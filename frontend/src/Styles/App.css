@@ -41,5 +41,13 @@ body {
 }
 
 #MyBody {
-    min-height: calc(100vh - 58px - 132px);
+    min-height: calc(100vh - 58px - 134px);
 }
+
+@media(max-width: 767px)
+{
+    .PhoneDispleyNone {
+        display: none;
+    }
+}
+
