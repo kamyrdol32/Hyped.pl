@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+
+    hyped-frontend:
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        container_name: hyped-frontend
+        restart: unless-stopped
+        networks:
+            -   nginx_network
+            -   hyped_network
+
+
+    hyped-backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        container_name: hyped-backend
+        restart: unless-stopped
+        ports:
+            -   "5003:5003"
+        networks:
+            - nginx_network
+            - hyped_network
+
+
+networks:
+    nginx_network:
+        external: true
+    hyped_network:
