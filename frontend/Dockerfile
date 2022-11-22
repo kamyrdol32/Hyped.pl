@@ -1,5 +1,5 @@
 # Image
-FROM node:alpine as builder
+FROM node:latest as builder
 
 # Work directory
 WORKDIR /frontend
@@ -8,7 +8,10 @@ WORKDIR /frontend
 COPY package*.json ./
 
 # Installations
-RUN npm install
+RUN npm install -g npm@latest
+
+# Export environment variables
+ENV NODE_OPTIONS="--openssl-legacy-provider"
 
 # Copy source code
 COPY ./ ./
