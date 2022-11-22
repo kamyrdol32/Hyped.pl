@@ -5,3 +5,4 @@
 # React
 /frontend/node_modules/
 /backend/config.py
+/frontend/src/Utils/i18n.js
