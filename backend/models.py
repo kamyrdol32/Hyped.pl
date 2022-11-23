@@ -1,10 +1,11 @@
 import core
 
+from core import db
 from datetime import datetime
 
 
 
-class User(core.db.Model):
+class User(db.Model):
     __tablename__ = 'Users'
     ID = core.db.Column(core.db.Integer, primary_key=True)
     Username = core.db.Column(core.db.String(80), unique=True, nullable=False)
