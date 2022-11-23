@@ -1,5 +1,5 @@
 # Image
-FROM node:latest as builder
+FROM node:alpine as builder
 
 # Work directory
 WORKDIR /frontend
