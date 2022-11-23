@@ -1,6 +1,7 @@
+import core
+
 from datetime import datetime
 
-import core
 
 
 class User(core.db.Model):

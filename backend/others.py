@@ -4,8 +4,6 @@ import string
 
 from flask_mail import Message
 
-import models
-
 
 def send_welcome_email(username, email, key):
     msg = Message("Hyped.pl - Potwierdzenie rejestracji", recipients=[email])
