@@ -1,5 +1,5 @@
 # Image
-FROM python:3.8-alpine
+FROM python:3.10-slim-buster
 
 # Work directory
 WORKDIR /backend
