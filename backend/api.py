@@ -2,7 +2,6 @@ from flask import jsonify, Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 import core
-import models
 
 api_blueprint = Blueprint('api', __name__, )
 
@@ -21,7 +20,7 @@ def create_db():
 @api_blueprint.route('/films/get/<nr>')
 def get_films(nr=1):
     Table = []
-    Films = models.Film.query.filter(models.Film.ID.between((int(nr) - 1) * 10, int(nr) * 10 - 1))
+    Films = core.models.Film.query.filter(core.models.Film.ID.between((int(nr) - 1) * 10, int(nr) * 10 - 1))
     for Data in Films:
         Table.append({
             "ID": Data.ID,
@@ -45,7 +44,7 @@ def get_films(nr=1):
 def get_film(nr=False):
     if nr:
         print("[GET] Film - " + str(nr))
-        Film = models.Film.query.filter_by(ID=nr).first()
+        Film = core.models.Film.query.filter_by(ID=nr).first()
         if Film:
             return jsonify({
                 "ID": Film.ID,
@@ -75,7 +74,7 @@ def get_film(nr=False):
 @api_blueprint.route('/serials/get/<nr>')
 def get_serials(nr=1):
     Table = []
-    Serials = models.Serial.query.filter(models.Serial.ID.between((int(nr) - 1) * 10, int(nr) * 10 - 1))
+    Serials = core.models.Serial.query.filter(core.models.Serial.ID.between((int(nr) - 1) * 10, int(nr) * 10 - 1))
     for Data in Serials:
         Table.append({
             "ID": Data.ID,
@@ -98,7 +97,7 @@ def get_serials(nr=1):
 def get_serial(nr=False):
     if nr:
         print("[GET] Serial - " + str(nr))
-        Serial = models.Serial.query.filter_by(ID=nr).first()
+        Serial = core.models.Serial.query.filter_by(ID=nr).first()
         return jsonify({
             "ID": Serial.ID,
             "Title": Serial.Title,
@@ -123,8 +122,8 @@ def search(name):
 
             name = name.replace('_', ' ')
 
-            Films = models.Film.query.filter(models.Film.Title.like('%' + name + '%')).all()
-            Serials = models.Serial.query.filter(models.Serial.Title.like('%' + name + '%')).all()
+            Films = core.models.Film.query.filter(core.models.Film.Title.like('%' + name + '%')).all()
+            Serials = core.models.Serial.query.filter(core.models.Serial.Title.like('%' + name + '%')).all()
 
             Table = []
 
@@ -183,16 +182,16 @@ def get_film_comments(type=False, nr=False):
     if nr and type:
         print("[GET] Comments - " + str(nr))
         if type == "film":
-            Comments = models.Comment.query.filter_by(Film_ID=nr)
+            Comments = core.models.Comment.query.filter_by(Film_ID=nr)
         elif type == "serial":
-            Comments = models.Comment.query.filter_by(Serial_ID=nr)
+            Comments = core.models.Comment.query.filter_by(Serial_ID=nr)
         Table = []
         for Comment in Comments:
             Table.append({
                 "ID": Comment.ID,
                 "Film_ID": Comment.Film_ID,
                 "User_ID": Comment.User_ID,
-                "User": models.User.query.filter_by(ID=Comment.User_ID).first().Username,
+                "User": core.models.User.query.filter_by(ID=Comment.User_ID).first().Username,
                 "Comment": Comment.Comment,
                 "Date": Comment.Date,
             })
@@ -218,8 +217,8 @@ def add_film_comments(nr=False):
             print(type)
 
             if type == "film":
-                Comment = models.Comment(
-                    User_ID=models.User.query.filter_by(Username=current_user).first().ID,
+                Comment = core.models.Comment(
+                    User_ID=core.models.User.query.filter_by(Username=current_user).first().ID,
                     Comment=comment,
                     Film_ID=nr,
                     Serial_ID=None,
@@ -228,8 +227,8 @@ def add_film_comments(nr=False):
                 core.db.session.commit()
                 return jsonify({'success': 'Comment added'}), 200
             if type == "serial":
-                Comment = models.Comment(
-                    User_ID=models.User.query.filter_by(Username=current_user).first().ID,
+                Comment = core.models.Comment(
+                    User_ID=core.models.User.query.filter_by(Username=current_user).first().ID,
                     Comment=comment,
                     Film_ID=None,
                     Serial_ID=nr,
@@ -256,7 +255,7 @@ def get_film_rating(type=False, nr=False):
 
         print("[GET] Rating " + type + " - " + str(nr))
         if type == "film":
-            Rating = models.Rating.query.filter_by(Film_ID=nr, User_ID=models.User.query.filter_by(Username=current_user).first().ID).first()
+            Rating = core.models.Rating.query.filter_by(Film_ID=nr, User_ID=core.models.User.query.filter_by(Username=current_user).first().ID).first()
             if Rating:
                 return jsonify({
                     "ID": Rating.ID,
@@ -272,7 +271,7 @@ def get_film_rating(type=False, nr=False):
                     "Rating": 0,
                 }), 200
         if type == "serial":
-            Rating = models.Rating.query.filter_by(Serial_ID=nr, User_ID=models.User.query.filter_by(Username=current_user).first().ID).first()
+            Rating = core.models.Rating.query.filter_by(Serial_ID=nr, User_ID=core.models.User.query.filter_by(Username=current_user).first().ID).first()
             if Rating:
                 return jsonify({
                     "ID": Rating.ID,
@@ -299,7 +298,7 @@ def get_all_film_rating():
     current_user = get_jwt_identity()
     if current_user:
         print("[GET] All user Rating")
-        Ratings = models.Rating.query.filter_by(User_ID=models.User.query.filter_by(
+        Ratings = core.models.Rating.query.filter_by(User_ID=core.models.User.query.filter_by(
             Username=current_user).first().ID)
         Table = []
         for Rating in Ratings:
@@ -308,7 +307,7 @@ def get_all_film_rating():
                     "ID": Rating.ID,
                     "Type": "film",
                     "DataID": Rating.Film_ID,
-                    "DataName": models.Film.query.filter_by(ID=Rating.Film_ID).first().Title,
+                    "DataName": core.models.Film.query.filter_by(ID=Rating.Film_ID).first().Title,
                     "Rating": Rating.Rate,
                 })
             if Rating.Serial_ID:
@@ -316,7 +315,7 @@ def get_all_film_rating():
                     "ID": Rating.ID,
                     "Type": "serial",
                     "DataID": Rating.Serial_ID,
-                    "DataName": models.Serial.query.filter_by(ID=Rating.Serial_ID).first().Title,
+                    "DataName": core.models.Serial.query.filter_by(ID=Rating.Serial_ID).first().Title,
                     "Rating": Rating.Rate,
                 })
         return jsonify(Table), 200
@@ -340,32 +339,32 @@ def add_film_rating(nr=False):
             Rating = []
 
             if type == "film":
-                if models.Rating.query.filter_by(Film_ID=nr, User_ID=models.User.query.filter_by(
+                if core.models.Rating.query.filter_by(Film_ID=nr, User_ID=core.models.User.query.filter_by(
                         Username=current_user).first().ID).first():
-                    Rating = models.Rating.query.filter_by(Film_ID=nr, User_ID=models.User.query.filter_by(
+                    Rating = core.models.Rating.query.filter_by(Film_ID=nr, User_ID=core.models.User.query.filter_by(
                         Username=current_user).first().ID).first()
                     Rating.Rate = rating
                     core.db.session.commit()
                     return jsonify({'success': 'Rating refreshed'}), 200
                 else:
-                    Rating = models.Rating(
-                        User_ID=models.User.query.filter_by(Username=current_user).first().ID,
+                    Rating = core.models.Rating(
+                        User_ID=core.models.User.query.filter_by(Username=current_user).first().ID,
                         Rate=(rating),
                         Film_ID=nr,
                         Serial_ID=None,
                     )
 
             if type == "serial":
-                if models.Rating.query.filter_by(Serial_ID=nr, User_ID=models.User.query.filter_by(
+                if core.models.Rating.query.filter_by(Serial_ID=nr, User_ID=core.models.User.query.filter_by(
                         Username=current_user).first().ID).first():
-                    Rating = models.Rating.query.filter_by(Serial_ID=nr, User_ID=models.User.query.filter_by(
+                    Rating = core.models.Rating.query.filter_by(Serial_ID=nr, User_ID=core.models.User.query.filter_by(
                         Username=current_user).first().ID).first()
                     Rating.Rate = rating
                     core.db.session.commit()
                     return jsonify({'success': 'Rating refreshed'}), 200
                 else:
-                    Rating = models.Rating(
-                        User_ID=models.User.query.filter_by(Username=current_user).first().ID,
+                    Rating = core.models.Rating(
+                        User_ID=core.models.User.query.filter_by(Username=current_user).first().ID,
                         Rate=(rating),
                         Film_ID=None,
                         Serial_ID=nr,
@@ -385,7 +384,7 @@ def add_film_rating(nr=False):
 @api_blueprint.route('/news/get')
 def get_all_news():
     print("[GET] All news")
-    Newses = models.Newses.query.all()
+    Newses = core.models.Newses.query.all()
     Table = []
     for News in Newses:
         Table.append({
