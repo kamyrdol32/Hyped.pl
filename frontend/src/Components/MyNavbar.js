@@ -58,9 +58,9 @@ function MyNavBar (props) {
                                 <Nav.Link>{t("seriale")}</Nav.Link>
                             </LinkContainer>
                         </Nav>
-                        <Form className="d-flex">
+                        <Form className="d-flex" onSubmit={searchData}>
                             <FormControl type="search" placeholder={t("fraza")} className="MyNavbar_Input me-2" aria-label="Search" onChange={handleSearch} />
-                            <Button variant="outline-warning" onClick={searchData} onSubmit={setSearch} onKeyDown={handleKeyPress}>{t("wyszukaj")}</Button>
+                            <Button type="submit" variant="outline-warning">{t("wyszukaj")}</Button>
                         </Form>
                         {!props.token && props.token !== "" && props.token !== "undefined"?
                             <Nav>

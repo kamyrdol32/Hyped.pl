@@ -5,7 +5,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
     unset_jwt_cookies
 from others import send_welcome_email, keyGenerator, passwordGenerator, send_forgot_email
 
-import core
+import app
 
 
 authorization_blueprint = Blueprint('auth', __name__, )
@@ -24,11 +24,11 @@ def register():
     password_confirm = request.json['password_confirm']
 
     # Sprawdzanie czy dane są prawidłowe
-    username_db = core.models.User.query.filter_by(Username=username).first()
+    username_db = app.models.User.query.filter_by(Username=username).first()
     if username_db and username == username_db.Username:
         return jsonify({"error": "Username already exists"}), 400
 
-    email_db = core.models.User.query.filter_by(Email=email).first()
+    email_db = app.models.User.query.filter_by(Email=email).first()
     if email_db and email == email_db.Email:
         return jsonify({"error": "Email already exists"}), 400
 
@@ -44,14 +44,14 @@ def register():
             register_password = hashlib.md5((register_password + key).encode('utf-8')).hexdigest()
 
             # Dodawanie do bazy danych
-            user = core.models.User(
+            user = app.models.User(
                 Username=username,
                 Email=email,
                 Password=register_password,
                 Secret_Key=key
             )
-            core.db.session.add(user)
-            core.db.session.commit()
+            app.db.session.add(user)
+            app.db.session.commit()
 
             # Wysyłanie wiadomości
             send_welcome_email(username, email, key)
@@ -60,8 +60,8 @@ def register():
 
         # W przypadku błędu
         except Exception as error:
-            core.db.session.rollback()
-            core.app.logger.error(error)
+            app.db.session.rollback()
+            app.app.logger.error(error)
             return jsonify({'error': error}), 500
     else:
         return jsonify({'error': 'Username, email or password is empty'})
@@ -81,7 +81,7 @@ def login():
         if not password:
             return jsonify({"error": "Missing password parameter"}), 400
 
-        user = core.models.User.query.filter_by(Username=username).first()
+        user = app.models.User.query.filter_by(Username=username).first()
 
         if not user:
             return jsonify({"error": "Wrong username or password"}), 400
@@ -104,7 +104,7 @@ def login():
         else:
             return jsonify({"error": "Wprowadzono błędne dane"}), 401
     except Exception as error:
-        core.app.logger.error(error)
+        app.app.logger.error(error)
         return jsonify({'error': error}), 500
 
 
@@ -119,16 +119,16 @@ def logout():
 def activate(key=False):
     if key:
         try:
-            user = core.models.User.query.filter_by(Secret_Key=key).first()
+            user = app.models.User.query.filter_by(Secret_Key=key).first()
             if user and user.Secret_Key == key:
                 user.Is_Active = 1
-                core.db.session.commit()
+                app.db.session.commit()
                 return jsonify({"success": "User activated"}), 200
             else:
                 return jsonify({"error": "User not found"}), 404
         except Exception as error:
-            core.db.session.rollback()
-            core.app.logger.error(error)
+            app.db.session.rollback()
+            app.app.logger.error(error)
             return jsonify({'error': error}), 500
     else:
         return jsonify({"error": "Key is empty"}), 400
@@ -145,7 +145,7 @@ def forgot_password():
         if not email:
             return jsonify({"error": "Missing email parameter"}), 400
 
-        user = core.models.User.query.filter_by(Email=email).first()
+        user = app.models.User.query.filter_by(Email=email).first()
 
         if user and user.Email == email:
 
@@ -161,7 +161,7 @@ def forgot_password():
             user.Secret_Key = Key
             user.Password = new_password
             user.Is_Active = 0
-            core.db.session.commit()
+            app.db.session.commit()
 
             # Wysyłanie wiadomości
             send_forgot_email(user.Username, user.Email, Key, Password)
@@ -170,8 +170,8 @@ def forgot_password():
         else:
             return jsonify({"error": "User not found"}), 404
     except Exception as error:
-        core.db.session.rollback()
-        core.app.logger.error(error)
+        app.db.session.rollback()
+        app.app.logger.error(error)
         return jsonify({'error': error}), 500
 
 
@@ -200,7 +200,7 @@ def change_password():
         if new_password != new_password2:
             return jsonify({"error": "New passwords are not equal"}), 400
 
-        user = core.models.User.query.filter_by(Username=username).first()
+        user = app.models.User.query.filter_by(Username=username).first()
         if not user:
             return jsonify({"error": "User not found"}), 404
 
@@ -218,12 +218,12 @@ def change_password():
 
         # Aktualizacja bazy danych
         user.Password = new_password
-        core.db.session.commit()
+        app.db.session.commit()
 
         return jsonify({"success": "Password changed"}), 200
     except Exception as error:
-        core.db.session.rollback()
-        core.app.logger.error(error)
+        app.db.session.rollback()
+        app.app.logger.error(error)
         return jsonify({'error': error}), 500
 
 
@@ -231,7 +231,7 @@ def change_password():
 @jwt_required()
 def profile():
     current_user = get_jwt_identity()
-    userData = core.models.User.query.filter_by(Username=current_user).first()
+    userData = app.models.User.query.filter_by(Username=current_user).first()
     response = jsonify({
         "username": userData.Username,
         "email": userData.Email,

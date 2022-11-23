@@ -1,4 +1,4 @@
-import core
+import app
 import random
 import string
 
@@ -13,7 +13,7 @@ def send_welcome_email(username, email, key):
                "http://87.207.92.40:3000/account/activate/" + str(key) + "\n\n" + \
                "Pozdrawiamy,\n" + \
                "Zespół Hyped.pl"
-    core.mail.send(msg)
+    app.mail.send(msg)
     return "Message sent!"
 
 def send_forgot_email(username, email, key, password):
@@ -25,7 +25,7 @@ def send_forgot_email(username, email, key, password):
                "Nowo wygenerowane hasło: " + str(password) + "\n\n" + \
                "Pozdrawiamy,\n" + \
                "Zespół Hyped.pl "
-    core.mail.send(msg)
+    app.mail.send(msg)
     return "Message sent!"
 
 

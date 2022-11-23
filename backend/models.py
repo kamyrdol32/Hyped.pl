@@ -1,18 +1,18 @@
-import core
+import app
 
 from datetime import datetime
 
 
 
-class User(core.db.Model):
+class User(app.db.Model):
     __tablename__ = 'Users'
-    ID = core.db.Column(core.db.Integer, primary_key=True)
-    Username = core.db.Column(core.db.String(80), unique=True, nullable=False)
-    Email = core.db.Column(core.db.String(120), unique=True, nullable=False)
-    Password = core.db.Column(core.db.String(120), nullable=False)
-    Secret_Key = core.db.Column(core.db.String(10), nullable=False)
-    Is_Active = core.db.Column(core.db.Boolean, default=False)
-    Is_Admin = core.db.Column(core.db.Boolean, default=False)
+    ID = app.db.Column(app.db.Integer, primary_key=True)
+    Username = app.db.Column(app.db.String(80), unique=True, nullable=False)
+    Email = app.db.Column(app.db.String(120), unique=True, nullable=False)
+    Password = app.db.Column(app.db.String(120), nullable=False)
+    Secret_Key = app.db.Column(app.db.String(10), nullable=False)
+    Is_Active = app.db.Column(app.db.Boolean, default=False)
+    Is_Admin = app.db.Column(app.db.Boolean, default=False)
 
 
     def __init__(self, Username, Email, Password, Secret_Key, Is_Active=False, Is_Admin=False):
@@ -33,20 +33,20 @@ class User(core.db.Model):
         return self.Username
 
 
-class Film(core.db.Model):
+class Film(app.db.Model):
     __tablename__ = 'Films'
-    ID = core.db.Column(core.db.Integer, primary_key=True)
-    Title = core.db.Column(core.db.String(128), nullable=True)
-    Original_Title = core.db.Column(core.db.String(128), nullable=True)
-    Year = core.db.Column(core.db.Integer, nullable=True)
-    Duration = core.db.Column(core.db.Integer, nullable=True)
-    Director = core.db.Column(core.db.String(128), nullable=True)
-    Country = core.db.Column(core.db.String(128), nullable=True)
-    Genre = core.db.Column(core.db.String(128), nullable=True)
-    Rating = core.db.Column(core.db.Float, nullable=True)
-    Description = core.db.Column(core.db.String(1000), nullable=True)
-    Image = core.db.Column(core.db.String(1000), nullable=True)
-    URL = core.db.Column(core.db.String(1000), nullable=True)
+    ID = app.db.Column(app.db.Integer, primary_key=True)
+    Title = app.db.Column(app.db.String(128), nullable=True)
+    Original_Title = app.db.Column(app.db.String(128), nullable=True)
+    Year = app.db.Column(app.db.Integer, nullable=True)
+    Duration = app.db.Column(app.db.Integer, nullable=True)
+    Director = app.db.Column(app.db.String(128), nullable=True)
+    Country = app.db.Column(app.db.String(128), nullable=True)
+    Genre = app.db.Column(app.db.String(128), nullable=True)
+    Rating = app.db.Column(app.db.Float, nullable=True)
+    Description = app.db.Column(app.db.String(1000), nullable=True)
+    Image = app.db.Column(app.db.String(1000), nullable=True)
+    URL = app.db.Column(app.db.String(1000), nullable=True)
 
     def __init__(self, Title, Original_Title, Year, Duration, Director, Country, Genre, Rating, Description, Image, URL):
         self.Title = Title
@@ -69,20 +69,20 @@ class Film(core.db.Model):
         return self.Title
 
 
-class Serial(core.db.Model):
+class Serial(app.db.Model):
     __tablename__ = 'Serials'
-    ID = core.db.Column(core.db.Integer, primary_key=True)
-    Title = core.db.Column(core.db.String(128), nullable=True)
-    Original_Title = core.db.Column(core.db.String(128), nullable=True)
-    Year = core.db.Column(core.db.String(80), nullable=True)
-    Duration = core.db.Column(core.db.Integer, nullable=True)
-    Director = core.db.Column(core.db.String(80), nullable=True)
-    Country = core.db.Column(core.db.String(80), nullable=True)
-    Genre = core.db.Column(core.db.String(80), nullable=True)
-    Rating = core.db.Column(core.db.Float, nullable=True)
-    Description = core.db.Column(core.db.String(1000), nullable=True)
-    Image = core.db.Column(core.db.String(1000), nullable=True)
-    URL = core.db.Column(core.db.String(1000), nullable=True)
+    ID = app.db.Column(app.db.Integer, primary_key=True)
+    Title = app.db.Column(app.db.String(128), nullable=True)
+    Original_Title = app.db.Column(app.db.String(128), nullable=True)
+    Year = app.db.Column(app.db.String(80), nullable=True)
+    Duration = app.db.Column(app.db.Integer, nullable=True)
+    Director = app.db.Column(app.db.String(80), nullable=True)
+    Country = app.db.Column(app.db.String(80), nullable=True)
+    Genre = app.db.Column(app.db.String(80), nullable=True)
+    Rating = app.db.Column(app.db.Float, nullable=True)
+    Description = app.db.Column(app.db.String(1000), nullable=True)
+    Image = app.db.Column(app.db.String(1000), nullable=True)
+    URL = app.db.Column(app.db.String(1000), nullable=True)
 
     def __init__(self, Title, Original_Title, Year, Duration, Director, Country, Genre, Rating, Description, Image, URL):
         self.Title = Title
@@ -105,14 +105,14 @@ class Serial(core.db.Model):
         return self.Title
 
 
-class Comment(core.db.Model):
+class Comment(app.db.Model):
     __tablename__ = 'Comments'
-    ID = core.db.Column(core.db.Integer, primary_key=True)
-    User_ID = core.db.Column(core.db.Integer, core.db.ForeignKey('Users.ID'))
-    Film_ID = core.db.Column(core.db.Integer, core.db.ForeignKey('Films.ID'), nullable=True)
-    Serial_ID = core.db.Column(core.db.Integer, core.db.ForeignKey('Serials.ID'), nullable=True)
-    Comment = core.db.Column(core.db.String(1000), nullable=True)
-    Date = core.db.Column(core.db.DateTime, nullable=True, default=datetime.utcnow)
+    ID = app.db.Column(app.db.Integer, primary_key=True)
+    User_ID = app.db.Column(app.db.Integer, app.db.ForeignKey('Users.ID'))
+    Film_ID = app.db.Column(app.db.Integer, app.db.ForeignKey('Films.ID'), nullable=True)
+    Serial_ID = app.db.Column(app.db.Integer, app.db.ForeignKey('Serials.ID'), nullable=True)
+    Comment = app.db.Column(app.db.String(1000), nullable=True)
+    Date = app.db.Column(app.db.DateTime, nullable=True, default=datetime.utcnow)
 
     def __init__(self, User_ID, Film_ID, Serial_ID, Comment):
         self.User_ID = User_ID
@@ -128,13 +128,13 @@ class Comment(core.db.Model):
         return self.Comment
 
 
-class Rating(core.db.Model):
+class Rating(app.db.Model):
     __tablename__ = 'Rates'
-    ID = core.db.Column(core.db.Integer, primary_key=True)
-    User_ID = core.db.Column(core.db.Integer, core.db.ForeignKey('Users.ID'))
-    Film_ID = core.db.Column(core.db.Integer, core.db.ForeignKey('Films.ID'), nullable=True)
-    Serial_ID = core.db.Column(core.db.Integer, core.db.ForeignKey('Serials.ID'), nullable=True)
-    Rate = core.db.Column(core.db.Integer, nullable=True)
+    ID = app.db.Column(app.db.Integer, primary_key=True)
+    User_ID = app.db.Column(app.db.Integer, app.db.ForeignKey('Users.ID'))
+    Film_ID = app.db.Column(app.db.Integer, app.db.ForeignKey('Films.ID'), nullable=True)
+    Serial_ID = app.db.Column(app.db.Integer, app.db.ForeignKey('Serials.ID'), nullable=True)
+    Rate = app.db.Column(app.db.Integer, nullable=True)
 
     def __init__(self, User_ID, Film_ID, Serial_ID, Rate):
         self.User_ID = User_ID
@@ -150,15 +150,15 @@ class Rating(core.db.Model):
         return self.Rate
 
 
-class Newses(core.db.Model):
+class Newses(app.db.Model):
     __tablename__ = 'Newses'
-    ID = core.db.Column(core.db.Integer, primary_key=True)
-    Title = core.db.Column(core.db.String(128), nullable=True)
-    Description = core.db.Column(core.db.String(1000), nullable=True)
-    Text = core.db.Column(core.db.String(10000), nullable=True)
-    Image = core.db.Column(core.db.String(1000), nullable=True)
-    URL = core.db.Column(core.db.String(1000), nullable=True)
-    Date = core.db.Column(core.db.DateTime, nullable=True, default=datetime.utcnow)
+    ID = app.db.Column(app.db.Integer, primary_key=True)
+    Title = app.db.Column(app.db.String(128), nullable=True)
+    Description = app.db.Column(app.db.String(1000), nullable=True)
+    Text = app.db.Column(app.db.String(10000), nullable=True)
+    Image = app.db.Column(app.db.String(1000), nullable=True)
+    URL = app.db.Column(app.db.String(1000), nullable=True)
+    Date = app.db.Column(app.db.DateTime, nullable=True, default=datetime.utcnow)
 
     def __init__(self, Title, Description, Text, Image, URL):
         self.Title = Title
