@@ -12,7 +12,8 @@ ENV FLASK_DEBUG=1
 ENV FLASK_RUN_PORT=5003
 
 # Requirements & Installations
-RUN apk-install mariadb-dev mariadb-client
+RUN apt-get update
+RUN apt-get install python3-dev default-libmysqlclient-dev gcc  -y
 RUN pip install --upgrade pip
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
