@@ -1,11 +1,11 @@
 # Image
-FROM python:3.10-slim-buster
+FROM python:3.8-alpine
 
 # Work directory
 WORKDIR /backend
 
 # Environment variables
-ENV FLASK_APP=core.py
+ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_ENV=development
 ENV FLASK_DEBUG=1
@@ -23,4 +23,4 @@ COPY . .
 
 # Run
 CMD ["flask", "run"]
-#CMD ["gunicorn", "--bind", "0.0.0.0:5003", "core:app"]
+#CMD ["gunicorn", "--bind", "0.0.0.0:5003", "app:app"]
