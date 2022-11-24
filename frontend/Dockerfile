@@ -16,15 +16,20 @@ ENV NODE_OPTIONS="--openssl-legacy-provider"
 # Copy source code
 COPY ./ ./
 
-# Build
-RUN npm run build
+# Run
+RUN npm start
 
+EXPOSE 3000
 
-# Image Nginx
-FROM nginx:alpine
-
-# Copy build
-COPY --from=builder /frontend/build /usr/share/nginx/html
-
-# Expose port
-EXPOSE 80
+## Build
+#RUN npm run build
+#
+#
+## Image Nginx
+#FROM nginx:alpine
+#
+## Copy build
+#COPY --from=builder /frontend/build /usr/share/nginx/html
+#
+## Expose port
+#EXPOSE 80
