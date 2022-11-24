@@ -16,10 +16,12 @@ ENV NODE_OPTIONS="--openssl-legacy-provider"
 # Copy source code
 COPY ./ ./
 
+# Expose
+EXPOSE 3000
+
 # Run
 RUN npm start
 
-EXPOSE 3000
 
 ## Build
 #RUN npm run build
