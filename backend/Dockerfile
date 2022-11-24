@@ -24,3 +24,6 @@ COPY . .
 # Run
 #CMD ["flask", "run"]
 CMD ["gunicorn", "--bind", "0.0.0.0:5003", "app:app"]
+
+# Expose port
+EXPOSE 5003
