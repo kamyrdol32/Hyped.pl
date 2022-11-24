@@ -6,23 +6,19 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
 from datetime import datetime, timezone, timedelta
 
-
-import models
-import api
-import authorization
-# import scraper
-
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
-app.register_blueprint(api.api_blueprint, url_prefix='/api')
-app.register_blueprint(authorization.authorization_blueprint, url_prefix='/auth')
-# app.register_blueprint(scraper.scraper_blueprint, url_prefix='/scraper')
 
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
 mail = Mail(app)
 
+import models
+import api
+import authorization
 
+app.register_blueprint(api.api_blueprint, url_prefix='/api')
+app.register_blueprint(authorization.authorization_blueprint, url_prefix='/auth')
 @app.errorhandler(404)
 def not_found_error(error):
     print(error)
