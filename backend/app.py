@@ -55,4 +55,4 @@ def refresh_expiring_tokens(response):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5003, debug=True)
