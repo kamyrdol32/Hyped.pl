@@ -31,6 +31,8 @@ export default function MyFilm(props) {
 	useQuery(['Rating'], fetchFilmRate, {
 		onSuccess: (data) => {
 			setRating(data.Rating)
+			console.log(data.Rating)
+			console.log("TEST")
 			props.setToken(data.access_token);
 		}
 	});
@@ -140,7 +142,7 @@ export default function MyFilm(props) {
 				</Col>
 				{props.token ?
 					<Container className="p-3 text-center">
-						<Rating onClick={sendRating} ratingValue={rating} allowHalfIcon={true} />
+						<Rating onClick={sendRating} initialValue={rating} allowHalfIcon={true} />
 					</Container>
 				:
 					<Container className="p-3">

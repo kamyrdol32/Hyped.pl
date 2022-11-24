@@ -140,7 +140,7 @@ export default function MySerial(props) {
 				</Col>
 				{props.token ?
 					<Container className="p-3 text-center">
-						<Rating onClick={sendRating} ratingValue={rating} allowHalfIcon={true} />
+						<Rating onClick={sendRating} initialValue={rating} allowHalfIcon={true} />
 					</Container>
 				:
 					<Container className="p-3">

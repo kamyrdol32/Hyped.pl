@@ -51,5 +51,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://hyped-backend:5003"
+  "proxy": "http://localhost:5003"
 }

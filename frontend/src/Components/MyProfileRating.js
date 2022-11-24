@@ -18,7 +18,7 @@ export default function MyProfileRating(props) {
 				}
 			</Col>
 			<Col md="4" className="MyProfileRating p-3 text-center">
-				<Rating ratingValue={props.Rating} readonly={true} size={25} />
+				<Rating initialValue={props.Rating} readonly={true} size={25} />
 			</Col>
 		</Row>
 	)
