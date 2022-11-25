@@ -336,6 +336,7 @@ def add_film_rating(nr=False):
 
             rating = request.json.get('rating', None)
             type = request.json.get('type', None)
+            rating = int(rating) / 20
             Rating = []
 
             if type == "film":
