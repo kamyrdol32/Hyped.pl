@@ -21,7 +21,7 @@ export default function MyHome() {
 	};
 
 	async function fetchNewses() {
-		const response = await fetch('http://hyped-backend:5003/api/news/get', {
+		const response = await fetch('https://hyped-backend:5003/api/news/get', {
 			method: 'GET',
 		})
 		return response.json();
