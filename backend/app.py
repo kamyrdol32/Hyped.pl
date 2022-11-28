@@ -4,6 +4,7 @@ from flask import Flask, render_template
 from flask_jwt_extended import JWTManager, get_jwt, create_access_token, get_jwt_identity
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
+from flask_cors import CORS
 from datetime import datetime, timezone, timedelta
 
 app = Flask(__name__)
@@ -12,6 +13,7 @@ app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
 mail = Mail(app)
+CORS(app)
 
 import models
 import api
