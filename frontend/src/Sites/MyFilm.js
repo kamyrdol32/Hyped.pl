@@ -38,7 +38,7 @@ export default function MyFilm(props) {
 	});
 
 	async function fetchFilmData() {
-		const response = await fetch('/api/film/get/' + params.ID, {
+		const response = await fetch('https://hyped-backend:5003/api/film/get/' + params.ID, {
 			method: 'GET',
 		})
 		if (response.status === 404) {
@@ -49,7 +49,7 @@ export default function MyFilm(props) {
 	}
 
 	async function fetchCommentsData() {
-		const response = await fetch('/api/comments/get/film/' + params.ID, {
+		const response = await fetch('https://hyped-backend:5003/api/comments/get/film/' + params.ID, {
 			method: 'GET',
 		})
 		if (response.status === 404 || response.status === 401) {
@@ -61,7 +61,7 @@ export default function MyFilm(props) {
 
 	async function fetchFilmRate() {
 		if (props.token) {
-			const response = await fetch('/api/rating/get/film/' + params.ID, {
+			const response = await fetch('https://hyped-backend:5003/api/rating/get/film/' + params.ID, {
 				method: 'GET',
 				headers: {
 					Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -81,7 +81,7 @@ export default function MyFilm(props) {
 	}
 
 	async function sendComment() {
-		const response = await fetch('/api/comments/add/' + params.ID, {
+		const response = await fetch('https://hyped-backend:5003/api/comments/add/' + params.ID, {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + props.token,
@@ -106,7 +106,7 @@ export default function MyFilm(props) {
 
 	async function sendRating(rating) {
 		setRating(rating)
-		const response = await fetch('/api/rating/add/' + params.ID, {
+		const response = await fetch('https://hyped-backend:5003/api/rating/add/' + params.ID, {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + props.token,

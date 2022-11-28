@@ -13,7 +13,7 @@ export default function MyForgetPassword() {
 	const [email, setEmail] = useState('');
 
 	async function fetchForgetPassword() {
-		const response = await fetch('/auth/forgot_password', {
+		const response = await fetch('https://hyped-backend:5003/auth/forgot_password', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

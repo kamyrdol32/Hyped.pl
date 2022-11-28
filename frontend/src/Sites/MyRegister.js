@@ -20,7 +20,7 @@ export default function MyRegister() {
 
 	function sendData() {
 		console.log(email, username, password);
-		fetch("/auth/register", {
+		fetch("https://hyped-backend:5003/auth/register", {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

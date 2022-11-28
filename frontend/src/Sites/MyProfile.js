@@ -29,7 +29,7 @@ export default function MyProfile(props) {
 
 
 	async function fetchProfile() {
-		const response = await fetch('/auth/profile', {
+		const response = await fetch('https://hyped-backend:5003/auth/profile', {
 			method: 'GET',
 			headers: {
 				Authorization: 'Bearer ' + props.token,
@@ -48,7 +48,7 @@ export default function MyProfile(props) {
 	}
 
 	async function fetchRating() {
-		const response = await fetch('/api/rating/get_all', {
+		const response = await fetch('https://hyped-backend:5003/api/rating/get_all', {
 			method: 'GET',
 			headers: {
 				Authorization: 'Bearer ' + props.token,
@@ -64,7 +64,7 @@ export default function MyProfile(props) {
 	}
 
 	async function fetchLogout() {
-		const response = await fetch('/auth/logout', {
+		const response = await fetch('https://hyped-backend:5003/auth/logout', {
 			method: 'GET',
 		})
 		if (response.status === 200) {

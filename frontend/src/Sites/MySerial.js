@@ -36,7 +36,7 @@ export default function MySerial(props) {
 	});
 
 	async function fetchSerialData() {
-		const response = await fetch('/api/serial/get/' + params.ID, {
+		const response = await fetch('https://hyped-backend:5003/api/serial/get/' + params.ID, {
 			method: 'GET',
 		})
 		if (response.status === 404) {
@@ -47,7 +47,7 @@ export default function MySerial(props) {
 	}
 
 	async function fetchCommentsData() {
-		const response = await fetch('/api/comments/get/serial/' + params.ID, {
+		const response = await fetch('https://hyped-backend:5003/api/comments/get/serial/' + params.ID, {
 			method: 'GET',
 		})
 		if (response.status === 404 || response.status === 401) {
@@ -59,7 +59,7 @@ export default function MySerial(props) {
 
 	async function fetchSerialRate() {
 		if (props.token) {
-			const response = await fetch('/api/rating/get/serial/' + params.ID, {
+			const response = await fetch('https://hyped-backend:5003/api/rating/get/serial/' + params.ID, {
 				method: 'GET',
 				headers: {
 					Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -79,7 +79,7 @@ export default function MySerial(props) {
 	}
 
 	async function sendComment() {
-		const response = await fetch('/api/comments/add/' + params.ID, {
+		const response = await fetch('https://hyped-backend:5003/api/comments/add/' + params.ID, {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + props.token,
@@ -104,7 +104,7 @@ export default function MySerial(props) {
 
 	async function sendRating(rating) {
 		setRating(rating)
-		const response = await fetch('/api/rating/add/' + params.ID, {
+		const response = await fetch('https://hyped-backend:5003/api/rating/add/' + params.ID, {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + props.token,

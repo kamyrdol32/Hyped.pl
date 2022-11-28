@@ -24,7 +24,7 @@ export default function MyFilmList() {
         }
     });
     async function fetchFilms() {
-        const response = await fetch('/api/films/get/' + page)
+        const response = await fetch('https://hyped-backend:5003/api/films/get/' + page)
         page++;
         return response.json();
     }
