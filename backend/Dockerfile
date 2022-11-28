@@ -10,7 +10,6 @@ ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_ENV=development
 ENV FLASK_DEBUG=1
 ENV FLASK_RUN_PORT=5003
-ENV FLASK_RUN_CERT=adhoc
 
 # Requirements & Installations
 RUN apt-get update
@@ -24,7 +23,7 @@ COPY . .
 
 # Run
 #CMD ["flask", "run"]
-CMD ["gunicorn", "--bind", "0.0.0.0:5003", "app:app"]
+CMD ["gunicorn", "--certfile", "cert.pem", "--keyfile", "key.pem", "--bind", "0.0.0.0:5003", "app:app"]
 
 # Expose port
 EXPOSE 5003
