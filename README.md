@@ -19,17 +19,10 @@
   - **HTML**
   - **CSS**:
     - Bootstrap,
-    
-### Założenia podczas tworzenia
-
-- [x] **System autoryzacji**
-  - Logowanie
-  - Tworzenie konta
-- [x] **System zarządzania utworami**
-- [x] **System zarządzania playlistami**
-  - Tworznie playlist
-  - Usuwanie playlist
-  - Upublicznianie playlist
 
 # Zdjęcia
-![This is an image](https://i.imgur.com/DdkRzJB.png)
+![Strona głowna](https://i.imgur.com/DdkRzJB.png)
+![System logowania](https://i.imgur.com/nFLkYKy.png)
+![Profil](https://i.imgur.com/ZM50Rcg.png)
+![Filmy](https://i.imgur.com/N9KNy73.png)
+![Opis](https://i.imgur.com/HNL3BDZ.png)
