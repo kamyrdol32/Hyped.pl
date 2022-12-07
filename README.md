@@ -32,4 +32,4 @@
   - Upublicznianie playlist
 
 # Zdjęcia
-![This is an image](https://imgur.com/DdkRzJB)
+![This is an image](https://i.imgur.com/DdkRzJB.png)
