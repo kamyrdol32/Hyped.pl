@@ -19,5 +19,17 @@
   - **HTML**
   - **CSS**:
     - Bootstrap,
+    
+### Założenia podczas tworzenia
 
-#### :star: Podgląd: Juz niebawem
+- [x] **System autoryzacji**
+  - Logowanie
+  - Tworzenie konta
+- [x] **System zarządzania utworami**
+- [x] **System zarządzania playlistami**
+  - Tworznie playlist
+  - Usuwanie playlist
+  - Upublicznianie playlist
+
+# Zdjęcia
+![This is an image](https://imgur.com/DdkRzJB)
