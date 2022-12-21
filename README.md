@@ -20,4 +20,14 @@
   - **CSS**:
     - Bootstrap,
 
-#### :star: Podgląd: Juz niebawem
+# Zdjęcia
+### Strona głowna
+![Strona głowna](https://i.imgur.com/DdkRzJB.png)
+### System logowania
+![System logowania](https://i.imgur.com/nFLkYKy.png)
+### Profil
+![Profil](https://i.imgur.com/ZM50Rcg.png)
+### Lista filmow
+![Filmy](https://i.imgur.com/N9KNy73.png)
+### Opis filmu
+![Opis](https://i.imgur.com/HNL3BDZ.png)
