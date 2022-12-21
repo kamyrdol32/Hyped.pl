@@ -16,7 +16,7 @@ export default function MySearch() {
 
 	const {data, isLoading, isError, error} = useQuery(['Search'], fetchSearchData);
 	async function fetchSearchData() {
-		const response = await fetch('https://hyped-backend:5003/api/search/' + params.NAME, {
+		const response = await fetch('/api/search/' + params.NAME, {
 			method: 'GET',
 		})
 		return response.json();

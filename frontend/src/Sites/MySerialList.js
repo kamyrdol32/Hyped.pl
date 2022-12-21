@@ -24,7 +24,7 @@ export default function MySerialList() {
         }
     });
     async function fetchSerials() {
-        const response = await fetch('https://hyped-backend:5003/api/serials/get/' + page)
+        const response = await fetch('/api/serials/get/' + page)
         page++;
         return response.json();
     }

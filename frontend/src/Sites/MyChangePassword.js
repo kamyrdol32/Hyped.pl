@@ -19,7 +19,7 @@ export default function MyChangePassword(props) {
 	const [newPassword2, setNewPassword2] = useState('');
 
 	async function fetchChangePassword() {
-		const response = await fetch('https://hyped-backend:5003/auth/change_password', {
+		const response = await fetch('/auth/change_password', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export default function MyChangePassword(props) {
 	}
 
 	async function fetchLogout() {
-		const response = await fetch('https://hyped-backend:5003/auth/logout', {
+		const response = await fetch('/auth/logout', {
 			method: 'GET',
 		})
 		if (response.status === 200) {

@@ -18,7 +18,7 @@ export default function MyLogin(props) {
 	const [password, setPassword] = useState('');
 
 	async function fetchLogin() {
-		const response = await fetch('https://hyped-backend:5003/auth/login', {
+		const response = await fetch('/auth/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

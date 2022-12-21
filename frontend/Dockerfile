@@ -19,7 +19,6 @@ COPY ./ ./
 # Build
 RUN npm run build
 
-
 # Image Nginx
 FROM nginx:alpine
 

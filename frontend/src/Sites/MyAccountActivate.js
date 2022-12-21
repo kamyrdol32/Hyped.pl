@@ -17,7 +17,7 @@ export default function MyAccountActivate() {
 
 	useQuery(['ActivateKey'], fetchActivateData);
 	async function fetchActivateData() {
-		const response = await fetch('https://hyped-backend:5003/auth/activate/' + params.KEY, {
+		const response = await fetch('/auth/activate/' + params.KEY, {
 			method: 'GET',
 		})
 		if (response.status === 404) {

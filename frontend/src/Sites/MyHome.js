@@ -21,7 +21,7 @@ export default function MyHome() {
 	};
 
 	async function fetchNewses() {
-		const response = await fetch('https://localhost:5003/api/news/get', {
+		const response = await fetch('/api/news/get', {
 			method: 'GET',
 		})
 		return response.json();
