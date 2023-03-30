@@ -5,13 +5,6 @@ import app
 
 api_blueprint = Blueprint('api', __name__, )
 
-
-@api_blueprint.route('/db/create')
-def create_db():
-    app.db.create_all()
-    return jsonify({'msg': 'Database created'})
-
-
 ##########
 # Films
 ##########

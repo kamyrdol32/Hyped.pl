@@ -3,7 +3,7 @@
 /backend/scraper.py
 
 # React
-/frontend/node_modules/
+/frontend2/node_modules/
 /backend/config.py
-/frontend/src/Utils/i18n.js
-/frontend/build/
+/frontend/src/Utils/i18n.jsx
+/frontend2/build/

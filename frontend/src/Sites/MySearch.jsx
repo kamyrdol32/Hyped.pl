@@ -3,12 +3,12 @@ import React from 'react';
 import {Container} from "react-bootstrap";
 import {useParams} from "react-router-dom";
 import {useQuery} from "@tanstack/react-query";
-import MyLoader from "../Components/MyLoader";
+import MyLoader from "../Components/MyLoader.jsx";
 import {toast} from "react-toastify";
 
 // CSS
 import '../Styles/MySearch.css';
-import MyCardList from "../Components/MyCardList";
+import MyCardList from "../Components/MyCardList.jsx";
 
 export default function MySearch() {
 

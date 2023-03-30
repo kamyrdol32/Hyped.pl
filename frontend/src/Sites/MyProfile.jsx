@@ -2,10 +2,10 @@
 import React, {useState} from 'react';
 import {Button, Col, Container} from "react-bootstrap";
 import {useQuery} from "@tanstack/react-query";
-import MyLoader from "../Components/MyLoader";
+import MyLoader from "../Components/MyLoader.jsx";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
-import MyProfileRating from "../Components/MyProfileRating";
+import MyProfileRating from "../Components/MyProfileRating.jsx";
 import {useTranslation} from "react-i18next";
 
 // CSS

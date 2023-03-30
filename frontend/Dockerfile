@@ -1,29 +1,19 @@
-# Image
-FROM node:alpine as builder
+FROM node
 
-# Work directory
+# Create app directory
 WORKDIR /frontend
 
-# Requirements
+# Copy package.json
 COPY package*.json ./
 
-# Installations
-RUN npm install -g npm@latest
+# Install app dependencies
+RUN npm install
 
-# Export environment variables
-ENV NODE_OPTIONS="--openssl-legacy-provider"
+# Copy app source code
+COPY . .
 
-# Copy source code
-COPY ./ ./
+# Expose port 3000
+EXPOSE 3004
 
-# Build
-RUN npm run build
-
-# Image Nginx
-FROM nginx:alpine
-
-# Copy build
-COPY --from=builder /frontend/build /var/www
-
-# Expose port
-EXPOSE 80
+# Run app
+CMD [ "npm", "run", "dev" ]

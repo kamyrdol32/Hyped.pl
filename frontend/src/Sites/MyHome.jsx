@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import {Carousel, Container} from "react-bootstrap";
 import {useQuery} from "@tanstack/react-query";
-import MyLoader from "../Components/MyLoader";
+import MyLoader from "../Components/MyLoader.jsx";
 import {toast} from "react-toastify";
 import {useTranslation} from "react-i18next";
 

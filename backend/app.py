@@ -21,6 +21,9 @@ import authorization
 
 app.register_blueprint(api.api_blueprint, url_prefix='/api')
 app.register_blueprint(authorization.authorization_blueprint, url_prefix='/auth')
+
+with app.app_context():
+    db.create_all()
 @app.errorhandler(404)
 def not_found_error(error):
     print(error)
@@ -50,7 +53,6 @@ def refresh_expiring_tokens(response):
             return response
     except (RuntimeError, KeyError):
         return response
-
 
 if __name__ == '__main__':
     app.run(port=5003, debug=True)

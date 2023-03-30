@@ -7,10 +7,11 @@ services:
             context: ./frontend
             dockerfile: Dockerfile
         container_name: hyped-frontend
-        restart: unless-stopped
+        restart: always
+        ports:
+            - "3004:3004"
         networks:
-            -   nginx_network
-            -   hyped_network
+            -   hyped_default
 
 
     hyped-backend:
@@ -20,13 +21,11 @@ services:
         container_name: hyped-backend
         restart: unless-stopped
         ports:
-            -   "5003:5003"
+            -   "5004:5004"
         networks:
-            - nginx_network
-            - hyped_network
+            - hyped_default
 
 
 networks:
-    nginx_network:
+    hyped_default:
         external: true
-    hyped_network:

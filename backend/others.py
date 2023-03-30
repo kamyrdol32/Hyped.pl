@@ -9,8 +9,7 @@ def send_welcome_email(username, email, key):
     msg = Message("Hyped.pl - Potwierdzenie rejestracji", recipients=[email])
     msg.body = "Witaj " + str(username) + "!\n\n" + \
                "Aby potwierdzić rejestrację kliknij w poniższy link:\n\n" + \
-               "http://hyped.pl/account/activate/" + str(key) + "\n" + \
-               "http://87.207.92.40:3000/account/activate/" + str(key) + "\n\n" + \
+               "http://hyped.kamilzeglen.pl/account/activate/" + str(key) + "\n\n" + \
                "Pozdrawiamy,\n" + \
                "Zespół Hyped.pl"
     app.mail.send(msg)

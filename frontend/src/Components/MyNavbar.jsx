@@ -2,14 +2,14 @@
 import React, {useContext, useState} from 'react';
 import {Button, Container, Dropdown, Form, FormControl, Nav, Navbar} from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
-import ThemeContext from "../Context/ThemeContext";
+import ThemeContext from "../Context/ThemeContext.jsx";
 import { useTranslation } from 'react-i18next';
 
 // CSS
 import '../Styles/MyNavbar.css';
 
 // Code
-function MyNavBar (props) {
+function MyNavbar (props) {
 
     const { t, i18n } = useTranslation();
     const languages = [
@@ -100,4 +100,4 @@ function MyNavBar (props) {
   );
 }
 
-export default MyNavBar;
+export default MyNavbar;

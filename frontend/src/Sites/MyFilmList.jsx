@@ -5,26 +5,26 @@ import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {toast} from "react-toastify";
 
 // Components
-import MyLoader from '../Components/MyLoader';
-import MyCardList from "../Components/MyCardList";
+import MyLoader from '../Components/MyLoader.jsx';
+import MyCardList from "../Components/MyCardList.jsx";
 
 
 // Code
-export default function MySerialList() {
+export default function MyFilmList() {
 
     let page = 1;
     const queryClient = useQueryClient()
 
-    const [serials, setSerials] = useState([]);
-    const {isLoading, isError} = useQuery(['Serials'], fetchSerials, {
+    const [films, setFilms] = useState([]);
+    const {isLoading, isError} = useQuery(['Films'], fetchFilms, {
         keepPreviousData: true,
         refetchOnWindowFocus: false,
         onSuccess: (data) => {
-            setSerials(oldSerials => [...oldSerials, ...data]);
+            setFilms(oldFilms => [...oldFilms, ...data]);
         }
     });
-    async function fetchSerials() {
-        const response = await fetch('/api/serials/get/' + page)
+    async function fetchFilms() {
+        const response = await fetch('/api/films/get/' + page)
         page++;
         return response.json();
     }
@@ -35,7 +35,7 @@ export default function MySerialList() {
 
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
-            queryClient.invalidateQueries('Serials')
+            queryClient.invalidateQueries('Films')
             window.removeEventListener('scroll', handleScroll);
             setInterval(() => {
                 window.addEventListener('scroll', handleScroll);
@@ -49,8 +49,8 @@ export default function MySerialList() {
     return (
         <Container>
             {/*<Row>*/}
-                {serials.map(serial => (
-                    <MyCardList key={serial.ID} Type="Serial" ID={serial.ID} Image={serial.Image} Title={serial.Title} Original_Title={serial.Original_Title} Rating={serial.Rating} Description={serial.Description} Year={serial.Year} Director={serial.Director} Country={serial.Country} Genre={serial.Genre} />
+                {films.map(film => (
+                    <MyCardList key={film.ID} Type="Film" ID={film.ID} Image={film.Image} Title={film.Title} Original_Title={film.Original_Title} Rating={film.Rating} Description={film.Description} Year={film.Year} Director={film.Director} Country={film.Country} Genre={film.Genre}  />
                 ))}
             {/*</Row>*/}
         </Container>

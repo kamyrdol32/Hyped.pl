@@ -1,29 +1,31 @@
-# Image
-FROM python:3.8-slim-buster
+FROM python:3.11-alpine
 
-# Work directory
+# Create app directory
 WORKDIR /backend
 
 # Environment variables
-ENV FLASK_APP=app.py
+ENV FLASK_APP=core.py
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_ENV=production
+ENV FLASK_ENV=development
 ENV FLASK_DEBUG=1
-ENV FLASK_RUN_PORT=5003
+ENV FLASK_RUN_PORT=5004
+ENV POETRY_VERSION=1.4.0
 
-# Requirements & Installations
-RUN apt-get update
-RUN apt-get install python3-dev default-libmysqlclient-dev gcc  -y
-RUN pip install --upgrade pip
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
+# System deps:
+RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 
-# Copy source code
+# Copy only requirements to cache them in docker layer
+COPY poetry.lock pyproject.toml ./
+
+# Project initialization:
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-dev
+
+# Copy project
 COPY . .
 
-# Run
-#CMD ["flask", "run"]
-CMD ["gunicorn", "--certfile", "cert.pem", "--keyfile", "key.pem", "--bind", "0.0.0.0:5003", "app:app"]
-
 # Expose port
-EXPOSE 5003
+EXPOSE 5004
+
+# Run app
+CMD ["gunicorn", "--bind", "0.0.0.0:5004", "wsgi:app"]

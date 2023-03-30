@@ -8,15 +8,15 @@ import { Rating } from "react-simple-star-rating";
 import {useTranslation} from "react-i18next";
 
 // Components
-import MyLoader from "../Components/MyLoader";
-import MyComments from "../Components/MyComments";
+import MyLoader from "../Components/MyLoader.jsx";
+import MyComments from "../Components/MyComments.jsx";
 
 // CSS
-import '../Styles/MyFilm.css';
-import MyCard from "../Components/MyCard";
+import '../Styles/MySerial.css';
+import MyCard from "../Components/MyCard.jsx";
 
 // Code
-export default function MyFilm(props) {
+export default function MySerial(props) {
 
 	const queryClient = useQueryClient()
 	const params = useParams()
@@ -26,42 +26,40 @@ export default function MyFilm(props) {
 	const [comment, setComment] = useState("");
 	const [rating, setRating] = useState(0)
 
-	const dataFilm = useQuery(['Film'], fetchFilmData);
+	const dataSerial = useQuery(['Serial'], fetchSerialData);
 	const dataComments = useQuery(['Comments'], fetchCommentsData);
-	useQuery(['Rating'], fetchFilmRate, {
+	useQuery(['Rating'], fetchSerialRate, {
 		onSuccess: (data) => {
 			setRating(data.Rating)
-			console.log(data.Rating)
-			console.log("TEST")
 			props.setToken(data.access_token);
 		}
 	});
 
-	async function fetchFilmData() {
-		const response = await fetch('/api/film/get/' + params.ID, {
+	async function fetchSerialData() {
+		const response = await fetch('/api/serial/get/' + params.ID, {
 			method: 'GET',
 		})
 		if (response.status === 404) {
-			toast.error(t("film_nie_istnieje"));
+			toast.error(t("serial_nie_istnieje"));
 			navigate('/');
 		}
 		return response.json();
 	}
 
 	async function fetchCommentsData() {
-		const response = await fetch('/api/comments/get/film/' + params.ID, {
+		const response = await fetch('/api/comments/get/serial/' + params.ID, {
 			method: 'GET',
 		})
 		if (response.status === 404 || response.status === 401) {
-			toast.error(t("film_nie_istnieje"));
+			toast.error(t("serial_nie_istnieje"));
 			navigate('/');
 		}
 		return response.json();
 	}
 
-	async function fetchFilmRate() {
+	async function fetchSerialRate() {
 		if (props.token) {
-			const response = await fetch('/api/rating/get/film/' + params.ID, {
+			const response = await fetch('/api/rating/get/serial/' + params.ID, {
 				method: 'GET',
 				headers: {
 					Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -69,7 +67,7 @@ export default function MyFilm(props) {
 				}
 			})
 			if (response.status === 404) {
-				toast.error(t("film_nie_istnieje"));
+				toast.error(t("serial_nie_istnieje"));
 				navigate('/');
 			}
 			if (response.status === 403) {
@@ -89,11 +87,11 @@ export default function MyFilm(props) {
 			},
 			body: JSON.stringify({
 				comment: comment,
-				type: "film",
+				type: "serial",
 			}),
 		})
 		if (response.status === 404 || response.status === 401) {
-			toast.error(t("film_nie_istnieje"));
+			toast.error(t("serial_nie_istnieje"));
 			navigate('/');
 		}
 		if (response.status === 200) {
@@ -114,26 +112,26 @@ export default function MyFilm(props) {
 			},
 			body: JSON.stringify({
 				rating: rating,
-				type: "film",
+				type: "serial",
 			}),
 		})
 		if (response.status === 404 || response.status === 401) {
-			toast.error(t("film_nie_istnieje"));
+			toast.error(t("serial_nie_istnieje"));
 			navigate('/');
 		}
 		if (response.status === 200) {
-			toast.success(t("ocena_dodana"));
+			toast.success("Ocena została dodana!");
 		}
 	}
 
-	if (dataFilm.isLoading || dataComments.isLoading) return <MyLoader />
-	if (dataFilm.error) return toast.error(dataFilm.error);
+	if (dataSerial.isLoading || dataComments.isLoading) return <MyLoader />
+	if (dataSerial.error) return toast.error(dataSerial.error);
 	if (dataComments.error) return toast.error(dataComments.error);
 
 	return (
 		<Container id="MyFilm" className="p-3 m-0 justify-content-center row">
 
-			<MyCard key={dataFilm.data.ID} Type="Film" ID={dataFilm.data.ID} Image={dataFilm.data.Image} Title={dataFilm.data.Title} Original_Title={dataFilm.data.Original_Title} Duration={dataFilm.data.Duration} Rating={dataFilm.data.Rating} Description={dataFilm.data.Description} Year={dataFilm.data.Year} Director={dataFilm.data.Director} Country={dataFilm.data.Country} Genre={dataFilm.data.Genre} URL={dataFilm.data.URL} />
+			<MyCard key={dataSerial.data.ID} Type="Film" ID={dataSerial.data.ID} Image={dataSerial.data.Image} Title={dataSerial.data.Title} Original_Title={dataSerial.data.Original_Title} Duration={dataSerial.data.Duration} Rating={dataSerial.data.Rating} Description={dataSerial.data.Description} Year={dataSerial.data.Year} Director={dataSerial.data.Director} Country={dataSerial.data.Country} Genre={dataSerial.data.Genre} URL={dataSerial.data.URL} />
 
 
 			<Col xl="9" id="MyFilm_Rate" className="p-3 m-3">
