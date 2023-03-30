@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd Projects/evpanel/
+            cd Projects/hyped/
             git pull origin master
-            docker network create evpanel_default
+            docker network create hyped_default
             docker compose up -d --build
