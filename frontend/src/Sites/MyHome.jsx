@@ -1,5 +1,5 @@
 // Imports
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Carousel, Container} from "react-bootstrap";
 import {useQuery} from "@tanstack/react-query";
 import MyLoader from "../Components/MyLoader.jsx";
@@ -11,52 +11,57 @@ import '../Styles/MyHome.css';
 
 // Code
 export default function MyHome() {
-	const {t} = useTranslation();
 
-	const [index, setIndex] = useState(0);
-	const {data, isLoading, isError, error} = useQuery(['Newses'], fetchNewses);
+    const {t} = useTranslation();
 
-	const handleSelect = (selectedIndex, e) => {
-		setIndex(selectedIndex);
-	};
+    const [index, setIndex] = useState(0);
+    const {data, isLoading, isError, error} = useQuery(['Newses'], fetchNewses);
 
-	async function fetchNewses() {
-		const response = await fetch('/api/news/get', {
-			method: 'GET',
-		})
-		return response.json();
-	}
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
 
-	if (isLoading) return <MyLoader />
-	if (isError) return toast.error(error);
+    async function fetchNewses() {
+        const response = await fetch('/api/news/get', {
+            method: 'GET',
+        })
+        return response.json();
+    }
 
-	return(
-		<Container className="justify-content-center p-5 row">
-			<Container id="MyHome" className="col-12">
+    if (isLoading) return <MyLoader/>
+    if (isError) return toast.error(error);
 
-				<Carousel fade className="p-3" activeIndex={index} interval={null} onSelect={handleSelect}>
-					{data.map((item, index) => (
-						<Carousel.Item key={item.ID}>
-							<img
-								className="d-block w-100"
-								src={item.Image}
-								alt={item.Title}
-							/>
-							<Carousel.Caption>
-								<h3 className="PhoneDispleyNone">{item.Title}</h3>
-								<p className="PhoneDispleyNone">{item.Description}</p>
-							</Carousel.Caption>
-						</Carousel.Item>
-					))}
-				</Carousel>
-				<Container className="MyHome_Container p-3 ">
-					<Container className="MyHome_Title p-3 text-center">{data[index].Description}</Container>
-					<Container className="MyHome_Text p-3">{data[index].Text}</Container>
-					<Container className="MyHome_Footer p-3 text-center">
-						<a className="MyHome_Link" href={"https://www.filmweb.pl" + data[index].URL}>{t("wiecej_informacji")}</a>
-					</Container>
-				</Container>
-			</Container>
-		</Container>
-	);
+    toast.info("Demo account:")
+    toast.info("admin/123456")
+
+    return (
+        <Container className="justify-content-center p-5 row">
+            <Container id="MyHome" className="col-12">
+
+                <Carousel fade className="p-3" activeIndex={index} interval={null} onSelect={handleSelect}>
+                    {data.map((item, index) => (
+                        <Carousel.Item key={item.ID}>
+                            <img
+                                className="d-block w-100"
+                                src={item.Image}
+                                alt={item.Title}
+                            />
+                            <Carousel.Caption>
+                                <h3 className="PhoneDispleyNone">{item.Title}</h3>
+                                <p className="PhoneDispleyNone">{item.Description}</p>
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                    ))}
+                </Carousel>
+                <Container className="MyHome_Container p-3 ">
+                    <Container className="MyHome_Title p-3 text-center">{data[index].Description}</Container>
+                    <Container className="MyHome_Text p-3">{data[index].Text}</Container>
+                    <Container className="MyHome_Footer p-3 text-center">
+                        <a className="MyHome_Link"
+                           href={"https://www.filmweb.pl" + data[index].URL}>{t("wiecej_informacji")}</a>
+                    </Container>
+                </Container>
+            </Container>
+        </Container>
+    );
 }
