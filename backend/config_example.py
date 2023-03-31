@@ -6,8 +6,7 @@ from datetime import timedelta
 
 # Flask
 TESTING = True
-DEBUG = True
-FLASK_ENV = "development"
+FLASK_DEBUG = True
 SECRET_KEY = ""
 JSON_SORT_KEYS = False
 
@@ -24,6 +23,9 @@ MAIL_USERNAME = ""
 MAIL_PASSWORD = ""
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
+MAIL_DEFAULT_SENDER = ""
+MAIL_DEBUG = True
+MAIL_SUPPRESS_SEND = False
 
 
 # SQLALCHEMY
