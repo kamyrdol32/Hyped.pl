@@ -8,9 +8,6 @@ This website is a platform for movie enthusiasts to discover, rate, and review m
 | :---: | :---: | :---: |
 | **Kamil Żegleń** ([kamyrdol32](https://github.com/kamyrdol32))  | ![100%](https://progress-bar.dev/100)  | ![100%](https://progress-bar.dev/100)  |
 
-## Installation
-`Comming soon`
-
 ## Technologies used:
   - **Python**:
       - Flask,
@@ -25,8 +22,62 @@ This website is a platform for movie enthusiasts to discover, rate, and review m
   - **CSS**:
     - Bootstrap,
 
+## Installation
+### Requirements
+  - **Docker & Docker Compose**
+
+### Instruction
+
+Add config.py in /backend directory
+
+```bash
+from datetime import timedelta
+
+# Flask
+TESTING = True
+FLASK_DEBUG = True
+SECRET_KEY = "#"
+JSON_SORT_KEYS = False
+
+
+# JWT
+JWT_SECRET_KEY = ""
+JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=30)
+
+
+# Email
+MAIL_SERVER = "smtp.gmail.com"
+MAIL_PORT = 465
+MAIL_USERNAME = ""
+MAIL_PASSWORD = ""
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+MAIL_DEFAULT_SENDER = ""
+MAIL_DEBUG = True
+MAIL_SUPPRESS_SEND = False
+
+
+# SQLALCHEMY
+SQLALCHEMY_DATABASE_URI =  ""
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+SQLALCHEMY_POOL_SIZE = 50000
+SQLALCHEMY_MAX_OVERFLOW = 50000
+```
+
+create docker network
+
+```bash
+docker network create hyped_default
+```
+
+and run project
+
+```bash
+docker-compose up
+```
+
 ## Demo:
-`Comming soon`
+<https://hyped.kamilzeglen.pl/>
 
 ## Photos
 ### Main Page
