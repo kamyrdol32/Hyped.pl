@@ -26,51 +26,24 @@ This website is a platform for movie enthusiasts to discover, rate, and review m
 ### Requirements
   - **Docker & Docker Compose**
 
+## Installation
+### Requirements
+  - **Docker & Docker Compose**
+  
+### Environment Variables
+To run this project, you will need to add the following environment file on main directory:
+
+**.env.backend**
+```bash
+SECRET_KEY=""
+SQLALCHEMY_DATABASE_URI=""
+JWT_SECRET_KEY=""
+MAIL_USERNAME=""
+MAIL_PASSWORD=""
+```
+
 ### Instruction
-
-Add config.py in /backend directory
-
-```bash
-from datetime import timedelta
-
-# Flask
-TESTING = True
-FLASK_DEBUG = True
-SECRET_KEY = ""
-JSON_SORT_KEYS = False
-
-
-# JWT
-JWT_SECRET_KEY = ""
-JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=30)
-
-
-# Email
-MAIL_SERVER = "smtp.gmail.com"
-MAIL_PORT = 465
-MAIL_USERNAME = ""
-MAIL_PASSWORD = ""
-MAIL_USE_TLS = False
-MAIL_USE_SSL = True
-MAIL_DEFAULT_SENDER = ""
-MAIL_DEBUG = True
-MAIL_SUPPRESS_SEND = False
-
-
-# SQLALCHEMY
-SQLALCHEMY_DATABASE_URI = ""
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-SQLALCHEMY_POOL_SIZE = 50000
-SQLALCHEMY_MAX_OVERFLOW = 50000
-```
-
-create docker network
-
-```bash
-docker network create hyped_default
-```
-
-and run project
+To deploy this project run project
 
 ```bash
 docker-compose up

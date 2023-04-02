@@ -10,8 +10,6 @@ services:
         restart: always
         ports:
             - "3004:3004"
-        networks:
-            -   hyped_default
 
 
     hyped-backend:
@@ -19,13 +17,8 @@ services:
             context: ./backend
             dockerfile: Dockerfile
         container_name: hyped-backend
+        env_file:
+            - .env.backend
         restart: unless-stopped
         ports:
             -   "5004:5004"
-        networks:
-            - hyped_default
-
-
-networks:
-    hyped_default:
-        external: true
