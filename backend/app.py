@@ -44,9 +44,10 @@ def internal_error(error):
     return render_template("500.html"), 500
 
 
-@app.route('/health_check')
+@app.route("/health_check")
 def health_check():
     return "Online"
+
 
 # Define a function that will be called whenever access to a protected endpoint is attempted
 @app.after_request
