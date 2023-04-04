@@ -31,9 +31,9 @@ This website is a platform for movie enthusiasts to discover, rate, and review m
   - **Docker & Docker Compose**
   
 ### Environment Variables
-To run this project, you will need to add the following environment file on main directory:
+To run this project, you will need to add the following environment file on **backend** directory:
 
-**.env.backend**
+**.env**
 ```bash
 SECRET_KEY=""
 SQLALCHEMY_DATABASE_URI=""

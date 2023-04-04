@@ -1,9 +1,0 @@
-# Python
-/venv/
-/backend/scraper.py
-
-# React
-/frontend2/node_modules/
-/backend/config.py
-/frontend/src/Utils/i18n.jsx
-/frontend2/build/

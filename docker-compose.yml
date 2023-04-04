@@ -20,7 +20,7 @@ services:
             dockerfile: Dockerfile
         container_name: hyped-backend
         env_file:
-            - .env.backend
+            - backend/.env
         restart: unless-stopped
         ports:
             -   "5004:5004"
