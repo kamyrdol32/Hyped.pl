@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_jwt_extended import (
     JWTManager,
     get_jwt,
@@ -46,7 +46,7 @@ def internal_error(error):
 
 @app.route("/health_check")
 def health_check():
-    return "Online"
+    return jsonify("OK"), 200
 
 
 # Define a function that will be called whenever access to a protected endpoint is attempted
