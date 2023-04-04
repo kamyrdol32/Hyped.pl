@@ -19,6 +19,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd Projects/hyped/
-            git pull origin master
+            git pull origin main
             docker compose up -d --build
             docker restart nginx_proxy
