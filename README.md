@@ -1,4 +1,4 @@
-# Hyped.pl
+# Hyped
 
 This website is a platform for movie enthusiasts to discover, rate, and review movies. With a vast collection of movies, TV shows, and documentaries, users can easily browse through different genres, filter content based on their preferences, and view ratings and reviews from other users. The website also offers personalized recommendations based on a user's viewing history and ratings. Users can create and customize their profiles, connect with other users, and even create and join movie clubs. The website is regularly updated with new content and features to keep users engaged. The repository contains the source code for the website, along with detailed documentation on how to customize it for different movie-related needs.
 
